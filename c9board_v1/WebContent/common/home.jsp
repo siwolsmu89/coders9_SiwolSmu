@@ -62,22 +62,53 @@
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
 	</div>
 	
-	<div class="modal" id="register-form">
+	<div class="modal fade" id="register-form">
 		<div class="modal-dialog">
-			<div class="modal-content" style="background-color: black; border: 1px solid gray;">
+			<div class="modal-content" style="background-color: gray; border: 1px solid gray;">
 				<div class="modal-header">
-					<h4>Welcome</h4>
+					<h4>User user = new User();</h4>
 				</div>
 				
 				<div class="modal-body">
-					<form>
-						<p>form here</p>
+					<form id="register-form" method="POST" action="register.jsp">
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">user.setId(</span>
+							</div>
+							<input style="background-color: #e9ecef; border: none;" type="text" name="userid" placeholder="// NOT NULL" />
+							<div class="input-group-append">
+								<span style="border:none;" class="input-group-text">)</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">user.setName(</span>
+							</div>
+							<input style="background-color: #e9ecef; border: none;" type="text" name="username" placeholder="// NOT NULL" />
+							<div class="input-group-append">
+								<span style="border:none;" class="input-group-text">)</span>
+							</div>
+						</div>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text">user.setName(</span>
+							</div>
+							<input style="background-color: #e9ecef; border: none;" type="text" name="usernickname" placeholder="// NULLABLE" />
+							<div class="input-group-append">
+								<span style="border:none;" class="input-group-text">)</span>
+							</div>
+						</div>
+						<!-- 
+							<input type="text" name="usernickname" placeholder="NULLABLE" />
+							<input type="password" name="userpassword1" placeholder="NOT NULL" />
+							<input type="password" name="userpassword2" placeholder=".equals(password)" />
+							<input type="text" name="usercontact" placeholder="NULLABLE" />
+						 -->
 					</form>
 				</div>
 				
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary">Submit</button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary">addUser(user);</button>
 				</div>
 			</div>
 		</div>
