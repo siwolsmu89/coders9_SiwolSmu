@@ -15,7 +15,7 @@ public class ConnectionUtil {
 		}
 	}
 	
-	public Connection getConnection() throws SQLException {
+	public static Connection getConnection() throws SQLException {
 		String url = "jdbc:mariadb://localhost:3306/coders9_board_v1?useUnicode=true&characterEncoding=utf8";
 		String user = "siwolsmu";
 		String pwd = "zxcv1234";

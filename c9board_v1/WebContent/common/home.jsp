@@ -60,11 +60,22 @@
 		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 	</div>
 	
+	<%
+		String error = request.getParameter("error");
+	%>
+	
 	<div class="body">
 		<div class="row text-center">
 			<div class="col-12">
 				<h1>Welcome To Board v1</h1>
 				<small class="text-muted">MinSeok Kwon</small>
+				<%
+					if (error != null) {
+				%>
+					<p style="color: red;">Login Failed : Check your ID/Password and Try again.</p>
+				<%
+					}
+				%>
 			</div>
 		</div>
 		<div class="row justify-content-center">
@@ -154,6 +165,11 @@
 								<span style="border:none;" class="input-group-text">)</span>
 							</div>
 						</div>
+						<div id="modal-error-box" style="display: none; color: red;">
+							<a href="#" style="text-decoration: underline;">coders9.UserIdDuplicatedException</a> 
+							<p class="text-right">at RegisterForm(Same ID already exists)</p>
+							<p class="text-right">at RegisterForm.user.setId(<a href="#" style="text-decoration: underline;">this.window:1</a>)</p>
+						</div>
 						<div class="text-center mt-3">
 							<button type ="button" class="close" data-dismiss="modal" style="display: none;">x</button>
 							<button type="button" class="btn btn-light" onclick="insertUser()">insertUser(<span style="color: #7a4e3c;">user</span>);</button>
@@ -186,16 +202,22 @@
 		var formData = "userid=" + document.querySelector("input[name=userid]").value
 					+ "&username=" + document.querySelector("input[name=username]").value
 					+ "&usernickname=" + document.querySelector("input[name=usernickname]").value
-					+ "&userpassword1=" + document.querySelector("input[name=userpassword1]").value
+					+ "&userpassword=" + document.querySelector("input[name=userpassword1]").value
 					+ "&usercontact=" + document.querySelector("input[name=usercontact]").value;
 		
 		var xhr = new XMLHttpRequest();
 		
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == 4 && xhr.status == 200) {
-				document.querySelector("input[name=loginid]").setAttribute("placeholder", "Welcome, New User");
-				document.querySelector("input[name=loginpwd]").setAttribute("placeholder", "Happy To See You");
-				document.querySelector(".close").click();
+				var result = xhr.responseText;
+				if (result == "success") {
+					document.querySelector("#modal-error-box").style.display="none";
+					document.querySelector("input[name=loginid]").setAttribute("placeholder", "Welcome, New User");
+					document.querySelector("input[name=loginpwd]").setAttribute("placeholder", "Happy To See You");
+					document.querySelector(".close").click();
+				} else {
+					document.querySelector("#modal-error-box").style.display="";					
+				}
 			}
 		}
 		
