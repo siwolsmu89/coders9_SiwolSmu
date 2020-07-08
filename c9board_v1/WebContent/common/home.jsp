@@ -20,7 +20,7 @@
 		margin-top: 6%;
 	}
 	
-	.container {
+	.container .body {
 	  max-width: 800px;
 	  margin: auto;
 	  margin-top: 10%;
@@ -91,13 +91,13 @@
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
 	</div>
 	
+	<!-- 모달창 -->
 	<div class="modal fade" id="modal-register-form">
 		<div class="modal-dialog">
 			<div class="modal-content" style="color: black; background-color: white; border: 1px solid gray;">
 				<div class="modal-header">
 					<h4>User <span style="color: #7a4e3c;">user</span> = <span style="font-weight: bold; color: #5f0260;">new</span> User();</h4>
 				</div>
-				
 				<div class="modal-body">
 					<form id="register-form" method="POST" action="../account/register.jsp">
 						<div class="input-group">
@@ -160,7 +160,6 @@
 						</div>
 					</form>
 				</div>
-				
 			</div>
 		</div>
 	</div>
