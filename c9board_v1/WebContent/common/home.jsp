@@ -53,13 +53,34 @@
 		<div class="row justify-content-center">
 			<div class="col-5 text-right">
 				<!-- JOIN 버튼 누를 경우 회원가입 폼 modal 창 팝업 -->
-				<p class="sm text-muted">Not registered yet? <button class="badge badge-secondary sm">JOIN</button></p>
+				<p class="sm text-muted">Not registered yet? <button class="badge badge-secondary sm" data-toggle="modal" data-target="#register-form">JOIN</button></p>
 			</div>
 		</div>
 	</div>
 	
 	<div class="footer">
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+	</div>
+	
+	<div class="modal" id="register-form">
+		<div class="modal-dialog">
+			<div class="modal-content" style="background-color: black; border: 1px solid gray;">
+				<div class="modal-header">
+					<h4>Welcome</h4>
+				</div>
+				
+				<div class="modal-body">
+					<form>
+						<p>form here</p>
+					</form>
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary">Submit</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 </body>
