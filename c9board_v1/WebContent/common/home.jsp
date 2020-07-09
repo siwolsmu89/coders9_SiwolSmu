@@ -115,10 +115,13 @@
 							<div class="input-group-prepend">
 								<span class="input-group-text"><span style="color: #7a4e3c;">user</span>.setId(</span>
 							</div>
-							<input style="border: none;" type="text" name="userid" onkeyup="resize(event)" />
+							<input style="border: none;" type="text" name="userid" onkeyup="resize(event)" onchange="checkId()" />
 							<div class="input-group-append">
 								<span style="border:none;" class="input-group-text">)</span>
 							</div>
+						</div>
+						<div id="input-userid-error" style="display:none;">
+							<small style="color: red;">ID must be written with alphabet. It can hold numbers, but not in first letter.</small>
 						</div>
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -188,7 +191,58 @@
 		event.target.setAttribute("style", "border: none; width: " + width + ";");
 	}
 	
+	function checkId() {
+		var idRegExp = /^[a-zA-Z](a-zA-Z0-9)/;
+		var id = document.querySelector("input[name=userid]").value;
+		
+		if (!idRegExp.exec(id)) {
+			document.querySelector("#input-userid-error").style.display="";
+			document.querySelector("input[name=userid]").focus();
+			document.querySelector("input[name=userid]").value = "";
+			return;
+		}
+	}
+	
 	function checkForms() {
+		
+		var id = document.querySelector("input[name=userid]").value;
+		
+		if (!id) {
+			document.querySelector("input[name=userid]").focus();
+			return true;
+		}
+		
+		var name = document.querySelector("input[name=username]").value;
+
+		if (!name) {
+			document.querySelector("input[name=username]").focus();
+			return true;
+		}
+		
+		var nickname = document.querySelector("input[name=usernickname]").value;
+		
+		if (!nickname) {
+			document.querySelector("input[name=usernickname]").focus();
+			return true;
+		}
+		
+		var pwd1 = document.querySelector("input[name=userpassword1]").value;
+		
+		if (!pwd1) {
+			document.querySelector("input[name=userpassword1]").focus();
+			return true;
+		}
+		
+		var pwd2 = document.querySelector("input[name=userpassword2]").value;
+		
+		if (pwd1 != pwd2) {
+			document.querySelector("input[name=userpassword1]").value = "";
+			document.querySelector("input[name=userpassword2]").value = "";
+			document.querySelector("input[name=userpassword1]").focus();
+			return true;
+		}
+		
+		var contact = document.querySelector("input[name=usercontact]").value;
 		
 		return false;
 	}
@@ -225,7 +279,6 @@
 		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 		
 		xhr.send(formData);
-		
 	}
 </script>
 </body>
