@@ -150,6 +150,9 @@
 								<span style="border:none;" class="input-group-text">)</span>
 							</div>
 						</div>
+						<div id="input-pwd-error" style="display:none;">
+							<small style="color: red;">Password must contain 1 alphabet, 1 number, 1 symbol each.</small>
+						</div>
 						<div class="input-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><span style="color: #7a4e3c;">user</span>.checkPassword(</span>
@@ -199,6 +202,18 @@
 			document.querySelector("#input-userid-error").style.display="";
 			document.querySelector("input[name=userid]").focus();
 			document.querySelector("input[name=userid]").value = "";
+			return;
+		}
+	}
+	
+	function checkPwd() {
+		var pwdRegExp = /(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)/;
+		var pwd = document.querySelector("input[name=userpassword1]").value;
+		
+		if (!pwdRegExp.exec(pwd)) {
+			document.querySelector("#input-pwd-error").style.display = "";
+			document.querySelector("input[name=userpassword1]").focus();
+			document.querySelector("input[name=userpassword1]").value = "";
 			return;
 		}
 	}
