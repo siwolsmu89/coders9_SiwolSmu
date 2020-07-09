@@ -23,7 +23,7 @@
 	.container .body {
 	  max-width: 800px;
 	  margin: auto;
-	  margin-top: 10%;
+	  margin-top: 100px;
 	}
 	
 	.input-group span {
@@ -287,6 +287,8 @@
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var result = xhr.responseText;
+				result = result.replace(/\n/g, "").trim();
+				console.log(result);
 				if (result == "success") {
 					document.querySelector("#modal-error-box").style.display="none";
 					document.querySelector("input[name=loginid]").setAttribute("placeholder", "Welcome, New User");

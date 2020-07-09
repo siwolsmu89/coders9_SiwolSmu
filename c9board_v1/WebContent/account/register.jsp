@@ -15,7 +15,8 @@
 	User savedUser = ud.getUserById(id);
 	
 	if (savedUser != null) {
-		out.write("duplicated");
+		String error = "duplicated";
+		out.write(error);
 		return;
 	}
 	
@@ -27,5 +28,6 @@
 	user.setContact(contact);
 	
 	ud.insertUser(user);
-	out.write("success");
+	String msg = "success";
+	out.write(msg);
 %>
