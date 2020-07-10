@@ -1,3 +1,6 @@
+<%@page import="v1.board.c9.vo.Board"%>
+<%@page import="java.util.List"%>
+<%@page import="v1.board.c9.dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -37,6 +40,19 @@
 </style>
 </head>
 <body>
+<%
+	if (session.getAttribute("loginUserNo") == null) {
+		
+		response.sendRedirect("../common/home.jsp?error=session");
+		return;
+	}
+	
+	int userNo = (int) session.getAttribute("loginUserNo");
+	String userNickname = (String) session.getAttribute("loginUserNickname");
+	
+	BoardDao boardDao = new BoardDao();
+//	List<Board> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap, begin, end);
+%>
 <div class="container">
 	<div class="header">
 		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
@@ -46,7 +62,7 @@
 		<div class="row">
 			<div class="col-12 text-center mb-5">
 				<h1>Board v1 List</h1>
-				<small class="text-muted">MinSeok Kwon</small>
+				<small class="text-muted">Welcome, <%=userNickname %></small>
 			</div>
 		</div>
 	
@@ -68,6 +84,7 @@
 					</div>
 				</div>
 			</div>
+			
 			
 			<div id="main-table" class="row">
 				<div class="col-12">
@@ -104,17 +121,15 @@
 				</div>
 			</div>
 			
-			<div id="pagination" class="row">
-				<div class="col-12 text-center text-muted">
+			<div id="lower-form" class="row mt-3">
+				<div class="col-8 pl-5  text-muted">
 					<small>&laquo; 1234 &raquo;</small>
 				</div>
-			</div>
 			
-			<div id="lower-form" class="row mt-3">
-				<div class="col-12 d-flex justify-content-end">
+				<div class="col-4 d-flex justify-content-end">
 					<div class="form-group">
 						<input type="text" name="keyword" />
-						<button class="badge badge-dark">Search</button>
+						<button class="badge badge-dark">Find</button>
 					</div>
 				</div>
 			</div>

@@ -70,9 +70,13 @@
 				<h1>Welcome To Board v1</h1>
 				<small class="text-muted">MinSeok Kwon</small>
 				<%
-					if (error != null) {
+					if (error.equals("loginfail")) {
 				%>
 					<p style="color: red;">Login Failed : Check your ID/Password and Try again.</p>
+				<%
+					} else if (error.equals("session")) {
+				%>
+					<p style="color: red;">Session Invalidated : Please Login Again.</p>
 				<%
 					}
 				%>
