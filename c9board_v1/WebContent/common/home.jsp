@@ -70,14 +70,20 @@
 				<h1>Welcome To Board v1</h1>
 				<small class="text-muted">MinSeok Kwon</small>
 				<%
-					if (error.equals("loginfail")) {
+					if (error != null) {
+						if (error.equals("loginfail")) {
 				%>
-					<p style="color: red;">Login Failed : Check your ID/Password and Try again.</p>
+						<p style="color: red;">Login Failed : Check your ID/Password and Try Again.</p>
 				<%
-					} else if (error.equals("session")) {
+						} else if (error.equals("session")) {
 				%>
-					<p style="color: red;">Session Invalidated : Please Login Again.</p>
+						<p style="color: red;">Session Invalidated : Please Login Again.</p>
 				<%
+						} else {
+				%>
+						<p style="color red;">Error Occurred : Pleas Try Again.</p>
+				<%			
+						}
 					}
 				%>
 			</div>
@@ -102,8 +108,14 @@
 		</div>
 	</div>
 	
-	<div class="footer">
+	<div class="row justify-content-center mt-5">
+		<div class="col-5">
+			<div style="border: 1px solid lightgray;" onmouseover="showFooter()"></div>
+		</div>
+	</div>
+	<div class="footer" onclick="hideFooter()">
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+		<%@ include file="footer.jsp" %>
 	</div>
 	
 	<!-- 모달창 -->
@@ -309,6 +321,15 @@
 		
 		xhr.send(formData);
 	}
+	
+	function showFooter() {
+		document.querySelector(".footer div").style.display="";
+	}
+	
+	function hideFooter() {
+		document.querySelector(".footer div").style.display="none";
+	}
+	
 </script>
 </body>
 </html>
