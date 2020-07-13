@@ -23,7 +23,7 @@
 	.container .body {
 	  max-width: 800px;
 	  margin: auto;
-	  margin-top: 100px;
+	  margin-top: 50px;
 	}
 	
 	.input-group span {
@@ -36,7 +36,6 @@
 	.input-group span span {
 		padding: 0px;
 	}
-	
 	.input-group input {
 		background-color: white !important;
 		width: 15px;
@@ -51,15 +50,20 @@
 	.input-group input {
 		font-weight: bold;
 	}
-	
 </style>
 </head>
 <body>
 <div class="container">
-	<div class="header">
+	<div class="header mb-3">
 		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
+		<%@ include file="header.jsp" %>
 	</div>
 	
+	<div class="row justify-content-center">
+		<div class="col-5">
+			<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>
+		</div>
+	</div>
 	<%
 		String error = request.getParameter("error");
 	%>
@@ -252,6 +256,14 @@
 	
 	function hideFooter() {
 		document.querySelector(".footer div").style.display="none";
+	}
+	
+	function showHeader() {
+		document.querySelector(".header div").style.display="";
+	}
+	
+	function hideHeader() {
+		document.querySelector(".header div").style.display="none";
 	}
 	
 </script>
