@@ -136,9 +136,25 @@
 		</form>
 	</div>
 	
-	<div class="footer">
+	<div class="row justify-content-center mt-5">
+		<div class="col-12">
+			<div style="border: 1px solid lightgray;" onmouseover="showFooter()"></div>
+		</div>
+	</div>
+	<div class="footer" onclick="hideFooter()">
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
+<script type="text/javascript">
+	function showFooter() {
+		document.querySelector(".footer div").style.display="";
+	}
+	
+	function hideFooter() {
+		document.querySelector(".footer div").style.display="none";
+	}
+	
+</script>
 </body>
 </html>
