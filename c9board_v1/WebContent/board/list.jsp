@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="v1.board.c9.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@page import="v1.board.c9.dao.BoardDao"%>
@@ -47,19 +49,29 @@
 		return;
 	}
 	
-	int pageNo = 0;
-	if (request.getParameter("pageno") == null) {
-		pageNo = 1;
-	} else {
-		pageNo = Integer.parseInt(request.getParameter("pageno"));
-	}
-	int rowsPerPage = 10;
+	String paramPageNo = request.getParameter("pageno");
+	String paramKeyword = request.getParameter("keyword");
+	String paramWriterType = request.getParameter("writertype");
+	String paramRowCount = request.getParameter("rowcount");
+	
+	int pageNo = paramPageNo == null ? 0 : Integer.parseInt(paramPageNo);
+	String keyword = paramKeyword == null ? "" : paramKeyword;
+	String writerType = paramWriterType == null ? "" : paramWriterType;
+	int rowsPerPage = paramRowCount == null ? 10 : Integer.parseInt(paramRowCount);
+	
+	Map<String, Object> conditionMap = new HashMap<String, Object>();
+	conditionMap.put("keyword", keyword);
+	conditionMap.put("writerType", writerType);
+	conditionMap.put("pageNo", pageNo);
+	conditionMap.put("rowsPerPage", rowsPerPage);
+	conditionMap.put("userNo", session.getAttribute("loginUserNo"));
+	
 
 	int userNo = (int) session.getAttribute("loginUserNo");
 	String userNickname = (String) session.getAttribute("loginUserNickname");
 	
 	BoardDao boardDao = new BoardDao();
-//	List<Board> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap, pageNo);
+	List<Board> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap);
 %>
 <div class="container">
 	<div class="header mb-3">
