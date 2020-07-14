@@ -39,7 +39,7 @@ public class BoardDao {
 		return boardList;
 	}
 	
-	public List<Board> getBoardListWithCondition(int userNo, Map<String, Object> conditionMap, int begin, int end) {
+	public List<Board> getBoardListWithCondition(int userNo, Map<String, Object> conditionMap, int pageNo) {
 		List<Board> boardList = new ArrayList<Board>();
 		
 		return boardList;

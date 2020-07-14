@@ -19,10 +19,10 @@
 		background-color: black;
 		color: white;
 	}
-	.container {
+	.container .body {
 		max-width: 800px;
 		margin: auto;
-		margin-top: 100px;
+		margin-top: 50px;
 	}
 	.form-group select.form-control {
 		width: 120px;
@@ -47,15 +47,30 @@
 		return;
 	}
 	
+	int pageNo = 0;
+	if (request.getParameter("pageno") == null) {
+		pageNo = 1;
+	} else {
+		pageNo = Integer.parseInt(request.getParameter("pageno"));
+	}
+	int rowsPerPage = 10;
+
 	int userNo = (int) session.getAttribute("loginUserNo");
 	String userNickname = (String) session.getAttribute("loginUserNickname");
 	
 	BoardDao boardDao = new BoardDao();
-//	List<Board> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap, begin, end);
+//	List<Board> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap, pageNo);
 %>
 <div class="container">
-	<div class="header">
+	<div class="header mb-3">
 		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
+		<%@ include file="../common/header.jsp" %>
+	</div>
+	
+	<div class="row justify-content-center">
+		<div class="col-9">
+			<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>
+		</div>
 	</div>
 	
 	<div class="body">
@@ -137,7 +152,7 @@
 	</div>
 	
 	<div class="row justify-content-center mt-5">
-		<div class="col-12">
+		<div class="col-9">
 			<div style="border: 1px solid lightgray;" onmouseover="showFooter()"></div>
 		</div>
 	</div>
@@ -153,6 +168,14 @@
 	
 	function hideFooter() {
 		document.querySelector(".footer div").style.display="none";
+	}
+
+	function showHeader() {
+		document.querySelector(".header div").style.display="";
+	}
+	
+	function hideHeader() {
+		document.querySelector(".header div").style.display="none";
 	}
 	
 </script>
