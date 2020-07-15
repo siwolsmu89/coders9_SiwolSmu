@@ -19,7 +19,7 @@
 					<a class="nav-link" <%=directory.equals("board") ? colorActive : colorBasic %> href="/c9board_v1/board/list.jsp">Board</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" <%=directory.equals("account") ? colorActive : colorBasic %> href="/c9board_v1/account/myinfo.jsp">Account</a>
+					<a class="nav-link" <%=directory.equals("account") ? colorActive : colorBasic %> href="/c9board_v1/account/myinfo.jsp">My</a>
 				</li>
 			</ul>
 		</nav>

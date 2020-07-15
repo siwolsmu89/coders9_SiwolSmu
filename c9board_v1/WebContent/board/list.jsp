@@ -38,11 +38,11 @@
 		color: lightgray;
 		text-align: center;
 	}
-	table a {
+	a {
 		text-decoration: none;
 		color: lightgray;
 	}
-	table a:hover {
+	a:hover {
 		color: white;
 		font-weight: bolder;
 	}
@@ -178,8 +178,24 @@
 			</div>
 			
 			<div id="lower-form" class="row mt-3">
-				<div class="col-8 pl-5  text-muted">
-					<small>&laquo; 1234 &raquo;</small>
+				<div id="pagenation" class="col-8 pl-5  text-muted">
+				<%
+					int pagesPerBlock = 4;
+					int totalRows = boardDao.getBoardCount(keyword, writerType);
+					int totalPages = (int) (Math.ceil((double) totalRows/rowsPerPage));
+					int thisBlock = (pageNo/pagesPerBlock) + 1;
+					int blockBegin = (thisBlock-1) * 4 + 1;
+					int blockEnd = (thisBlock * 4) > totalPages ? totalPages : thisBlock;
+				%>
+					<small><a <%=pageNo > 1 ? "href='list.jsp?pageno=" + (pageNo - 1) + "'" : "" %>>&laquo;</a></small> 
+				<%
+					for (int i = blockBegin; i<=blockEnd; i++) {
+				%>
+					<small><a href="list.jsp?pageno=<%=i %>"><%=i %></a></small>
+				<%
+					}
+				%>
+					<small><a <%=pageNo < totalPages ? "href='list.jsp?pageno=" + (pageNo + 1) + "'" : "" %>>&raquo;</a></small> 
 				</div>
 			
 				<div class="col-4 d-flex justify-content-end">

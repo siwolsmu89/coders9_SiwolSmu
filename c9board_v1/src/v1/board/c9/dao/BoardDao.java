@@ -81,6 +81,31 @@ public class BoardDao {
 		con.close();
 	}
 	
+	public int getBoardCount(String keyword, String writerType) throws SQLException {
+		int count = 0;
+		
+		String sql = "SELECT count(1) AS cnt ";
+		sql += "FROM v1_boards ";
+		sql += "WHERE board_title like '%" + keyword + "%' ";
+		if (!"".equals(writerType)) {
+			sql += "AND user_no = " + writerType;
+		}
+		
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			count = rs.getInt("cnt");
+		}
+		
+		rs.close();
+		pstmt.close();
+		con.close();
+		
+		return count;
+	}
+	
 	public BoardDto getBoardByNo(int boardNo) throws SQLException {
 		BoardDto board = null;
 		Connection con = ConnectionUtil.getConnection();
