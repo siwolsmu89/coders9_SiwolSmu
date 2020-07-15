@@ -1,6 +1,6 @@
+<%@page import="v1.board.c9.dto.BoardDto"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@page import="v1.board.c9.vo.Board"%>
 <%@page import="java.util.List"%>
 <%@page import="v1.board.c9.dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -37,7 +37,14 @@
 	#main-table table {
 		color: lightgray;
 		text-align: center;
-		border-bottom: 1px solid gray;
+	}
+	table a {
+		text-decoration: none;
+		color: lightgray;
+	}
+	table a:hover {
+		color: white;
+		font-weight: bolder;
 	}
 </style>
 </head>
@@ -54,7 +61,9 @@
 	String paramWriterType = request.getParameter("writertype");
 	String paramRowCount = request.getParameter("rowcount");
 	
-	int pageNo = paramPageNo == null ? 0 : Integer.parseInt(paramPageNo);
+	int userNo = (int) session.getAttribute("loginUserNo");
+	String userNickname = (String) session.getAttribute("loginUserNickname");
+	int pageNo = paramPageNo == null ? 1 : Integer.parseInt(paramPageNo);
 	String keyword = paramKeyword == null ? "" : paramKeyword;
 	String writerType = paramWriterType == null ? "" : paramWriterType;
 	int rowsPerPage = paramRowCount == null ? 10 : Integer.parseInt(paramRowCount);
@@ -64,14 +73,10 @@
 	conditionMap.put("writerType", writerType);
 	conditionMap.put("pageNo", pageNo);
 	conditionMap.put("rowsPerPage", rowsPerPage);
-	conditionMap.put("userNo", session.getAttribute("loginUserNo"));
-	
-
-	int userNo = (int) session.getAttribute("loginUserNo");
-	String userNickname = (String) session.getAttribute("loginUserNickname");
+	conditionMap.put("userNo", userNo);
 	
 	BoardDao boardDao = new BoardDao();
-	List<Board> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap);
+	List<BoardDto> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap);
 %>
 <div class="container">
 	<div class="header mb-3">
@@ -131,18 +136,39 @@
 							</tr>
 						</thead>
 						<tbody>
+						<%
+							if (boardList.isEmpty()) {
+						%>
 							<tr>
-								<td>2</td>
-								<td>dummy</td>
-								<td>John Doe</td>
-								<td>2020.07.10</td>
+								<td colspan="5" style="color: crimson">There's No Articles Written Yet.</td>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td>dummy</td>
-								<td>Jane Doe</td>
-								<td>2020.07.10</td>
+						<%
+							} else {
+								for (BoardDto board : boardList) {
+									String myTitle = "";
+									if (board.getUserNo() == userNo) {
+										myTitle="font-style: italic;";
+									} 
+						%>
+							<tr style="<%=myTitle %>">
+								<td><%=board.getNo() %></td>
+								<td>
+									<a href="detail.jsp?boardno=<%=board.getNo() %>" >
+										<%=board.getTitle() %>
+									</a>
+								</td>
+								<td><%=board.getUserNickname() %></td>
+								<td><%=board.getCreatedDate() %></td>
 							</tr>
+							
+						<%
+								}
+							}
+						%>
+						<tr>
+							<td><a class="badge badge-secondary">Write</a></td>
+							<td colspan="3"></td>
+						</tr>
 						</tbody>
 					</table>
 				</div>
@@ -189,7 +215,6 @@
 	function hideHeader() {
 		document.querySelector(".header div").style.display="none";
 	}
-	
 </script>
 </body>
 </html>

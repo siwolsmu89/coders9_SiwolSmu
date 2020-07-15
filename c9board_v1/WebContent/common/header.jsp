@@ -8,7 +8,7 @@
 	String colorBasic = "style='color: lightgray;'";
 	String colorActive = "style='color: white; font-weight: bold;'";
 %>
-<div class="row justify-content-center" onclick="hideHeader()" style="display: none;">
+<div class="row justify-content-center" onclick="hideHeader()">
 	<div class="col-5 text-center mt-3">
 		<nav class="navbar navbar-expand-sm justify-content-center">
 			<ul class="navbar-nav" style="justify-content: space-between; width: 70%;">
@@ -23,7 +23,5 @@
 				</li>
 			</ul>
 		</nav>
-		
-		<small class="text-muted">If you want to close this window, Just Click around here.</small>
 	</div>
 </div>

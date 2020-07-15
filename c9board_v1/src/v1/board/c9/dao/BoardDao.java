@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import v1.board.c9.dto.BoardDto;
 import v1.board.c9.utils.ConnectionUtil;
 import v1.board.c9.utils.QueryUtil;
 import v1.board.c9.vo.Board;
@@ -16,6 +17,20 @@ public class BoardDao {
 	
 	private Board resultSetToBoard(ResultSet rs) {
 		Board board = new Board();
+		
+		return board;
+	}
+
+	private BoardDto resultSetToBoardDto(ResultSet rs) throws SQLException {
+		BoardDto board = new BoardDto();
+		
+		board.setNo(rs.getInt("board_no"));
+		board.setTitle(rs.getString("board_title"));
+		board.setContent(rs.getString("board_content"));
+		board.setCreatedDate(rs.getDate("board_created_date"));
+		board.setDeleted("Y".equals(rs.getString("board_deleted_yn")) ? true : false);
+		board.setUserNo(rs.getInt("user_no"));
+		board.setUserNickname(rs.getString("user_nickname"));
 		
 		return board;
 	}
@@ -32,20 +47,31 @@ public class BoardDao {
 		
 	}
 	
-	public Board getBoardByNo(int boardNo) {
-		Board board = null;
+	public BoardDto getBoardByNo(int boardNo) throws SQLException {
+		BoardDto board = null;
+		
+		String sql = "SELECT B.board_no, B.board_title, B.board_content, B.board_created_date, B.board_deleted_yn, B.user_no, U.user_nickname ";
+		sql += "FROM v1_boards B, v1_users U ";
+		sql += "WHERE B.user_no = U.user_no ";
+		sql += "AND B.board_no = " + boardNo;
+		
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			board = resultSetToBoardDto(rs);
+		}
+		
+		rs.close();
+		pstmt.close();
+		con.close();
 		
 		return board;
 	}
 	
-	public List<Board> getBoardListByRange(int begin, int end) {
-		List<Board> boardList = new ArrayList<Board>();
-		
-		return boardList;
-	}
-	
-	public List<Board> getBoardListWithCondition(int userNo, Map<String, Object> conditionMap) throws SQLException {
-		List<Board> boardList = new ArrayList<Board>();
+	public List<BoardDto> getBoardListWithCondition(int userNo, Map<String, Object> conditionMap) throws SQLException {
+		List<BoardDto> boardList = new ArrayList<BoardDto>();
 		
 		String keyword = (String) conditionMap.get("keyword");
 		String writerType = (String) conditionMap.get("writerType");
@@ -67,13 +93,14 @@ public class BoardDao {
 		if (!("").equals(writerType)) {
 			sql += "AND user_no = " + (String) conditionMap.get("loginUserNo") + " ";
 		}
+		sql += "ORDER BY boards.RN DESC";
 		
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		ResultSet rs = pstmt.executeQuery();
 		
 		while (rs.next()) {
-			Board board = resultSetToBoard(rs);
+			BoardDto board = resultSetToBoardDto(rs);
 			boardList.add(board);
 		}
 		
