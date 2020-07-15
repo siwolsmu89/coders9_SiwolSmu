@@ -101,18 +101,21 @@
 		<form id="form-list-condition" method="GET" action="list.jsp">
 			<div id="upper-form" class="row">
 				<div class="col-12 d-flex justify-content-end">
-					<div class="form-group">
+					<div class="form-group" onchange="submitConditionForm()">
 						<select id="select-row-count" class="form-control" name="rowcount">
-							<option value="10">10 rows</option>
-							<option value="20">20 rows</option>
-							<option value="50">50 rows</option>
+							<option value="10" <%=rowsPerPage == 10 ? "selected" : "" %>>10 rows</option>
+							<option value="20" <%=rowsPerPage == 20 ? "selected" : "" %>>20 rows</option>
+							<option value="50" <%=rowsPerPage == 50 ? "selected" : "" %>>50 rows</option>
 						</select>
 					</div>
-					<div class="ml-1 form-group">
+					<div class="ml-1 form-group" onchange="submitConditionForm()">
 						<select id="select-writer" class="form-control" name="writertype">
-							<option value="all">get All</option>
-							<option value="my">get My</option>
+							<option value="">get All</option>
+							<option value="<%=userNo %>" <%=(""+userNo).equals(writerType) ? "selected" : "" %>>get My</option>
 						</select>
+					</div>
+					<div style="display:none;">
+						<input type="hidden" name="pageno" value="<%=pageNo %>" >
 					</div>
 				</div>
 			</div>
@@ -166,7 +169,7 @@
 							}
 						%>
 						<tr>
-							<td><a class="badge badge-secondary">Write</a></td>
+							<td><a href="writeForm.jsp" class="badge badge-secondary">Write</a></td>
 							<td colspan="3"></td>
 						</tr>
 						</tbody>
@@ -181,7 +184,7 @@
 			
 				<div class="col-4 d-flex justify-content-end">
 					<div class="form-group">
-						<input type="text" name="keyword" />
+						<input type="text" name="keyword" value="<%=keyword %>"	placeholder="Find Title Containing Key" />
 						<button class="badge badge-dark">Find</button>
 					</div>
 				</div>
@@ -214,6 +217,10 @@
 	
 	function hideHeader() {
 		document.querySelector(".header div").style.display="none";
+	}
+	
+	function submitConditionForm() {
+		document.querySelector("#form-list-condition").submit();
 	}
 </script>
 </body>

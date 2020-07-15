@@ -35,28 +35,57 @@ public class BoardDao {
 		return board;
 	}
 	
-	public void insertBoard(Board board) {
+	public void insertBoard(Board board) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.insertBoard"));
+		pstmt.setString(1, board.getTitle());
+		pstmt.setString(2, board.getContent());
+		pstmt.setInt(3, board.getUserNo());
+		pstmt.executeUpdate();
 		
+		pstmt.close();
+		con.close();
 	}
 	
-	public void updateBoard(Board board) {
+	public void updateBoard(Board board) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.updateBoard"));
+		pstmt.setString(1, board.getTitle());
+		pstmt.setString(2, board.getContent());
+		pstmt.setInt(3, board.getNo());
+		pstmt.executeUpdate();
 		
+		pstmt.close();
+		con.close();
 	}
 	
-	public void deleteBoard(int boardNo) {
+	public void updateBoard(BoardDto board) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.updateBoard"));
+		pstmt.setString(1, board.getTitle());
+		pstmt.setString(2, board.getContent());
+		pstmt.setInt(3, board.getNo());
+		pstmt.executeUpdate();
 		
+		pstmt.close();
+		con.close();
+	}
+	
+	public void deleteBoard(int boardNo) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.deleteBoard"));
+		pstmt.setInt(1, boardNo);;
+		pstmt.executeUpdate();
+		
+		pstmt.close();
+		con.close();
 	}
 	
 	public BoardDto getBoardByNo(int boardNo) throws SQLException {
 		BoardDto board = null;
-		
-		String sql = "SELECT B.board_no, B.board_title, B.board_content, B.board_created_date, B.board_deleted_yn, B.user_no, U.user_nickname ";
-		sql += "FROM v1_boards B, v1_users U ";
-		sql += "WHERE B.user_no = U.user_no ";
-		sql += "AND B.board_no = " + boardNo;
-		
 		Connection con = ConnectionUtil.getConnection();
-		PreparedStatement pstmt = con.prepareStatement(sql);
+		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.getBoardByNo"));
+		pstmt.setInt(1, boardNo);
 		ResultSet rs = pstmt.executeQuery();
 		
 		if (rs.next()) {
@@ -85,13 +114,14 @@ public class BoardDao {
 		sql += "FROM (SELECT ROW_NUMBER() OVER(ORDER BY B.board_no) AS RN, B.board_no, B.board_title, B.board_content, B.board_created_date, B.board_deleted_yn, B.user_no, U.user_nickname ";
 		sql += "FROM v1_boards B, v1_users U ";
 		sql += "WHERE B.user_no = U.user_no ";
+		sql += "AND B.board_deleted_yn != 'Y' ";
 		sql += "ORDER BY B.board_no) boards ";
 		sql += "WHERE RN BETWEEN " + begin + " AND " + end + " ";
 		if (!("").equals(keyword)) {
 			sql += "AND board_title LIKE '%" + keyword + "%' ";
 		}
 		if (!("").equals(writerType)) {
-			sql += "AND user_no = " + (String) conditionMap.get("loginUserNo") + " ";
+			sql += "AND user_no = " + writerType + " ";
 		}
 		sql += "ORDER BY boards.RN DESC";
 		
