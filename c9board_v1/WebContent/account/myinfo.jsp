@@ -68,20 +68,23 @@
 				<tr>
 					<th>ID</th>
 					<td><%=user.getId() %></td>
-					<th>Name</th>
-					<td><%=user.getName() %></td>
-				</tr>
-				<tr>
-					<th>Nickname</th>
-					<td><%=user.getNickname() %></td>
-					<th>Contact</th>
-					<td><%=user.getContact() %></td>
-				</tr>
-				<tr>
 					<th>RegDate</th>
 					<td><%=user.getRegisteredDate() %></td>
+				</tr>
+				<tr>
+					<th>Name</th>
+					<td><%=user.getName() %></td>
+					<th>Nickname</th>
+					<td><%=user.getNickname() %></td>
+				</tr>
+				<tr>
+					<th>Contact</th>
+					<td><%=user.getContact() %></td>
 					<th>Update</th>
-					<td>Mod Del</td>
+					<td>
+						<span class="badge badge-secondary">Mod</span> 
+						<span class="badge badge-danger">Del</span>
+					</td>
 				</tr>
 			</table>
 			</div>
