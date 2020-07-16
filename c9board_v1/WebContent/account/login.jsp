@@ -20,6 +20,11 @@
 		response.sendRedirect("../common/home.jsp?error=loginfail");
 		return;
 	}
+	
+	if (user.isQuit()) {
+		response.sendRedirect("../common/home.jsp?error=quit");
+		return;
+	}
 
 	session.setAttribute("loginUserNo", user.getNo());
 	session.setAttribute("loginUserNickname", user.getNickname());

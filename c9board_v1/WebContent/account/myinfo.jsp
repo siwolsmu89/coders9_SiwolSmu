@@ -47,7 +47,7 @@
 	</div>
 	<%
 		if (session.getAttribute("loginUserNo") == null) {
-			response.sendRedirect("home.jsp?error=session");
+			response.sendRedirect("../common/home.jsp?error=session");
 			return;
 		}
 		int userNo = (int) session.getAttribute("loginUserNo");
@@ -82,8 +82,8 @@
 					<td><%=user.getContact() %></td>
 					<th>Update</th>
 					<td>
-						<span class="badge badge-secondary">Mod</span> 
-						<span class="badge badge-danger">Del</span>
+						<a href="modForm.jsp" class="badge badge-secondary">Mod</a> 
+						<span onclick="delUser()" class="badge badge-danger">Del</span>
 					</td>
 				</tr>
 			</table>
@@ -102,5 +102,32 @@
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
+<script type="text/javascript">
+
+	function delUser() {
+		if (confirm("If You quit, You can't use any of our services. Are you sure?")) {
+		
+			location.href="deluser.jsp";
+		}
+		
+	}
+	
+	
+	function showFooter() {
+		document.querySelector(".footer div").style.display="";
+	}
+	
+	function hideFooter() {
+		document.querySelector(".footer div").style.display="none";
+	}
+
+	function showHeader() {
+		document.querySelector(".header div").style.display="";
+	}
+	
+	function hideHeader() {
+		document.querySelector(".header div").style.display="none";
+	}
+</script>
 </body>
 </html>

@@ -83,6 +83,10 @@
 				%>
 						<p style="color: red;">Session Invalidated : Please Login Again.</p>
 				<%
+						} else if (error.equals("quit")) {
+				%>
+						<p style="color: red;">You are Dead To Us.</p>
+				<%
 						} else {
 				%>
 						<p style="color red;">Error Occurred : Pleas Try Again.</p>

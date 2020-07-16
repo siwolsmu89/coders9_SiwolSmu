@@ -136,11 +136,11 @@ public class BoardDao {
 		int end = rowsPerPage * pageNo;
 		
 		String sql = "SELECT boards.RN, boards.board_no, boards.board_title, boards.board_content, boards.board_created_date, boards.board_deleted_yn, boards.user_no, boards.user_nickname ";
-		sql += "FROM (SELECT ROW_NUMBER() OVER(ORDER BY B.board_no) AS RN, B.board_no, B.board_title, B.board_content, B.board_created_date, B.board_deleted_yn, B.user_no, U.user_nickname ";
+		sql += "FROM (SELECT ROW_NUMBER() OVER(ORDER BY B.board_no DESC) AS RN, B.board_no, B.board_title, B.board_content, B.board_created_date, B.board_deleted_yn, B.user_no, U.user_nickname ";
 		sql += "FROM v1_boards B, v1_users U ";
 		sql += "WHERE B.user_no = U.user_no ";
 		sql += "AND B.board_deleted_yn != 'Y' ";
-		sql += "ORDER BY B.board_no) boards ";
+		sql += "ORDER BY B.board_no DESC) boards ";
 		sql += "WHERE RN BETWEEN " + begin + " AND " + end + " ";
 		if (!("").equals(keyword)) {
 			sql += "AND board_title LIKE '%" + keyword + "%' ";

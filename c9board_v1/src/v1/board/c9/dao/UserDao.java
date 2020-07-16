@@ -65,8 +65,14 @@ public class UserDao {
 		
 	}
 	
-	public void deleteUser(int userNo) {
+	public void deleteUser(int userNo) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("user.deleteUser"));
+		pstmt.setInt(1, userNo);
+		pstmt.executeUpdate();
 		
+		pstmt.close();
+		con.close();
 	}
 	
 	public User getUserByNo(int userNo) throws SQLException {
