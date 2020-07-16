@@ -61,8 +61,18 @@ public class UserDao {
 		
 	}
 	
-	public void updateUser(User user) {
+	public void updateUser(User user) throws SQLException {
+		Connection con = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("user.updateUser"));
+		pstmt.setString(1, user.getNickname());
+		pstmt.setString(2, user.getContact());
+		pstmt.setString(3, user.getPassword());
+		pstmt.setInt(4, user.getNo());
 		
+		pstmt.executeUpdate();
+		
+		pstmt.close();
+		con.close();
 	}
 	
 	public void deleteUser(int userNo) throws SQLException {
