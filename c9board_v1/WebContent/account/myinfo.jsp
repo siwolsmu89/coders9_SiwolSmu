@@ -13,13 +13,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
-	@font-face {
-	  font-family: 'JCC';
-	  src: url('../resources/font/jellyka-cutty-cupcakes/Jellyka CuttyCupcakes.ttf');
-	}
+	@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap');
 
 	body {
-		font-family: 'JCC';
+		font-family: 'Patrick Hand';
 		background-color: black;
 		color: white;
 	}
