@@ -14,7 +14,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
+	@font-face {
+	  font-family: 'JCC';
+	  src: url('../resources/font/jellyka-cutty-cupcakes/Jellyka CuttyCupcakes.ttf');
+	}
+
 	body {
+		font-family: 'JCC';
 		background-color: black;
 		color: white;
 	}

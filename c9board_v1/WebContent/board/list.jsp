@@ -17,7 +17,13 @@
 
 <title>Welcome To Board v1</title>
 <style>
+	@font-face {
+	  font-family: 'JCC';
+	  src: url('../resources/font/jellyka-cutty-cupcakes/Jellyka CuttyCupcakes.ttf');
+	}
+
 	body {
+		font-family: 'JCC';
 		background-color: black;
 		color: white;
 	}

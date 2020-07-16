@@ -13,7 +13,13 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>Insert title here</title>
 <style>
+	@font-face {
+	  font-family: 'JCC';
+	  src: url('../resources/font/jellyka-cutty-cupcakes/Jellyka CuttyCupcakes.ttf');
+	}
+
 	body {
+		font-family: 'JCC';
 		background-color: black;
 		color: white;
 	}
@@ -30,6 +36,7 @@
 	
 	.table {
 		color: lightgray;
+		border-bottom: 1px solid lightgray;
 	}
 </style>
 </head>
@@ -62,7 +69,7 @@
 			</div>
 		</div>
 		
-		<div class="row justify-content-center">
+		<div class="row mt-3 justify-content-center">
 			<div class="col-9">
 			<table class="table">
 				<tr>
@@ -82,8 +89,8 @@
 					<td><%=user.getContact() %></td>
 					<th>Update</th>
 					<td>
-						<a href="modForm.jsp" class="badge badge-secondary">Mod</a> 
-						<span onclick="delUser()" class="badge badge-danger">Del</span>
+						<a href="modForm.jsp" ><button class="btn btn-sm btn-secondary">Mod</button></a>
+						<button type="button" onclick="delUser(event)" class="btn btn-sm btn-danger">Del</button>
 					</td>
 				</tr>
 			</table>
@@ -103,15 +110,12 @@
 	</div>
 </div>
 <script type="text/javascript">
-
 	function delUser() {
 		if (confirm("If You quit, You can't use any of our services. Are you sure?")) {
-		
+			
 			location.href="deluser.jsp";
 		}
-		
 	}
-	
 	
 	function showFooter() {
 		document.querySelector(".footer div").style.display="";

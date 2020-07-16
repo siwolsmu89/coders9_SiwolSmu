@@ -1,12 +1,12 @@
+<%@page import="v1.board.c9.dao.UserDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%
+	int userNo = (int) session.getAttribute("loginUserNo");
 
-</body>
-</html>
+	UserDao userDao = new UserDao();
+	userDao.deleteUser(userNo);
+	
+	session.invalidate();
+	response.sendRedirect("../common/home.jsp");
+%>

@@ -148,7 +148,7 @@ public class BoardDao {
 		if (!("").equals(writerType)) {
 			sql += "AND user_no = " + writerType + " ";
 		}
-		sql += "ORDER BY boards.RN DESC";
+		sql += "ORDER BY boards.board_no DESC";
 		
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(sql);
