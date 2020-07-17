@@ -40,6 +40,7 @@
 	#main-table table {
 		color: lightgray;
 		text-align: center;
+		border-bottom: 1px solid lightgray;
 	}
 	a {
 		text-decoration: none;
@@ -103,7 +104,10 @@
 	
 		<form id="form-list-condition" method="GET" action="list.jsp">
 			<div id="upper-form" class="row">
-				<div class="col-12 d-flex justify-content-end">
+				<div class="col-4">
+					<a href="writeForm.jsp" class="btn btn-secondary ml-3">Write</a>
+				</div>
+				<div class="col-8 d-flex justify-content-end">
 					<div class="form-group" onchange="submitConditionForm()">
 						<select id="select-row-count" class="form-control" name="rowcount">
 							<option value="10" <%=rowsPerPage == 10 ? "selected" : "" %>>10 rows</option>
@@ -171,16 +175,11 @@
 								}
 							}
 						%>
-						<tr>
-							<td><a href="writeForm.jsp" class="badge badge-secondary">Write</a></td>
-							<td colspan="3"></td>
-						</tr>
 						</tbody>
 					</table>
 				</div>
 			</div>
-			
-			<div id="lower-form" class="row mt-3">
+			<div id="lower-form" class="row">
 				<div id="pagenation" class="col-8 pl-5  text-muted">
 				<%
 					int pagesPerBlock = 4;
@@ -190,15 +189,15 @@
 					int blockBegin = (thisBlock-1) * 4 + 1;
 					int blockEnd = (thisBlock * 4) > totalPages ? totalPages : thisBlock;
 				%>
-					<small><a <%=pageNo > 1 ? "href='list.jsp?pageno=" + (pageNo - 1) + "'" : "" %>>&laquo;</a></small> 
+					<a <%=pageNo > 1 ? "href='list.jsp?pageno=" + (pageNo - 1) + "'" : "" %>>&laquo;</a>
 				<%
 					for (int i = blockBegin; i<=blockEnd; i++) {
 				%>
-					<small><a href="list.jsp?pageno=<%=i %>"><%=i %></a></small>
+					<a href="list.jsp?pageno=<%=i %>"><%=i %></a>
 				<%
 					}
 				%>
-					<small><a <%=pageNo < totalPages ? "href='list.jsp?pageno=" + (pageNo + 1) + "'" : "" %>>&raquo;</a></small> 
+					<a <%=pageNo < totalPages ? "href='list.jsp?pageno=" + (pageNo + 1) + "'" : "" %>>&raquo;</a> 
 				</div>
 			
 				<div class="col-4 d-flex justify-content-end">
