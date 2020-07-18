@@ -14,21 +14,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="../resources/css/common.css">
 <title>Welcome To Board v1</title>
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap');
 
-	body {
-		font-family: 'Patrick Hand';
-		background-color: black;
-		color: white;
-	}
-	.container .body {
-		max-width: 800px;
-		margin: auto;
-		margin-top: 50px;
-	}
 	.form-group select.form-control {
 		width: 120px;
 		text-align: right;
@@ -53,52 +42,42 @@
 </style>
 </head>
 <body>
-<%
-	if (session.getAttribute("loginUserNo") == null) {
-		
-		response.sendRedirect("../common/home.jsp?error=session");
-		return;
-	}
-	
-	String paramPageNo = request.getParameter("pageno");
-	String paramKeyword = request.getParameter("keyword");
-	String paramWriterType = request.getParameter("writertype");
-	String paramRowCount = request.getParameter("rowcount");
-	
-	int userNo = (int) session.getAttribute("loginUserNo");
-	String userNickname = (String) session.getAttribute("loginUserNickname");
-	int pageNo = paramPageNo == null ? 1 : Integer.parseInt(paramPageNo);
-	String keyword = paramKeyword == null ? "" : paramKeyword;
-	String writerType = paramWriterType == null ? "" : paramWriterType;
-	int rowsPerPage = paramRowCount == null ? 10 : Integer.parseInt(paramRowCount);
-	
-	Map<String, Object> conditionMap = new HashMap<String, Object>();
-	conditionMap.put("keyword", keyword);
-	conditionMap.put("writerType", writerType);
-	conditionMap.put("pageNo", pageNo);
-	conditionMap.put("rowsPerPage", rowsPerPage);
-	conditionMap.put("userNo", userNo);
-	
-	BoardDao boardDao = new BoardDao();
-	List<BoardDto> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap);
-%>
 <div class="container">
+	<%@ include file="../common/loginCheck.jsp" %>
 	<div class="header mb-3">
 		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 		<%@ include file="../common/header.jsp" %>
 	</div>
 	
-	<div class="row justify-content-center">
-		<div class="col-9">
-			<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>
-		</div>
-	</div>
+	<%
+		String paramPageNo = request.getParameter("pageno");
+		String paramKeyword = request.getParameter("keyword");
+		String paramWriterType = request.getParameter("writertype");
+		String paramRowCount = request.getParameter("rowcount");
+		
+		int userNo = (int) session.getAttribute("loginUserNo");
+		String userNickname = (String) session.getAttribute("loginUserNickname");
+		int pageNo = paramPageNo == null ? 1 : Integer.parseInt(paramPageNo);
+		String keyword = paramKeyword == null ? "" : paramKeyword;
+		String writerType = paramWriterType == null ? "" : paramWriterType;
+		int rowsPerPage = paramRowCount == null ? 10 : Integer.parseInt(paramRowCount);
+		
+		Map<String, Object> conditionMap = new HashMap<String, Object>();
+		conditionMap.put("keyword", keyword);
+		conditionMap.put("writerType", writerType);
+		conditionMap.put("pageNo", pageNo);
+		conditionMap.put("rowsPerPage", rowsPerPage);
+		conditionMap.put("userNo", userNo);
+		
+		BoardDao boardDao = new BoardDao();
+		List<BoardDto> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap);
+	%>
 	
 	<div class="body">
 		<div class="row">
 			<div class="col-12 text-center mb-5">
 				<h1>Board v1 List</h1>
-				<small class="text-muted">Welcome, <%=userNickname %></small>
+				<p class="text-muted">Welcome, <%=userNickname %></p>
 			</div>
 		</div>
 	
@@ -126,7 +105,6 @@
 					</div>
 				</div>
 			</div>
-			
 			
 			<div id="main-table" class="row">
 				<div class="col-12">
@@ -170,7 +148,6 @@
 								<td><%=board.getUserNickname() %></td>
 								<td><%=board.getCreatedDate() %></td>
 							</tr>
-							
 						<%
 								}
 							}
@@ -189,15 +166,15 @@
 					int blockBegin = (thisBlock-1) * 4 + 1;
 					int blockEnd = (thisBlock * 4) > totalPages ? totalPages : thisBlock;
 				%>
-					<a <%=pageNo > 1 ? "href='list.jsp?pageno=" + (pageNo - 1) + "'" : "" %>>&laquo;</a>
+					<a onclick="movePage(event, <%=pageNo > 1 ? pageNo - 1 : 1 %>)" <%=pageNo > 1 ? "href='#'" : "" %>>&laquo;</a>
 				<%
 					for (int i = blockBegin; i<=blockEnd; i++) {
 				%>
-					<a href="list.jsp?pageno=<%=i %>"><%=i %></a>
+					<a href="#" onclick="movePage(event, <%=i %>)"><%=i %></a>
 				<%
 					}
 				%>
-					<a <%=pageNo < totalPages ? "href='list.jsp?pageno=" + (pageNo + 1) + "'" : "" %>>&raquo;</a> 
+					<a onclick="movePage(event, <%=pageNo < totalPages ? pageNo + 1 : pageNo %>)" <%=pageNo < totalPages ? "href='#'" : "" %>>&raquo;</a> 
 				</div>
 			
 				<div class="col-4 d-flex justify-content-end">
@@ -209,32 +186,17 @@
 			</div>
 		</form>
 	</div>
-	
-	<div class="row justify-content-center mt-5">
-		<div class="col-9">
-			<div style="border: 1px solid lightgray;" onmouseover="showFooter()"></div>
-		</div>
-	</div>
+
 	<div class="footer" onclick="hideFooter()">
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
 <script type="text/javascript">
-	function showFooter() {
-		document.querySelector(".footer div").style.display="";
-	}
-	
-	function hideFooter() {
-		document.querySelector(".footer div").style.display="none";
-	}
-
-	function showHeader() {
-		document.querySelector(".header div").style.display="";
-	}
-	
-	function hideHeader() {
-		document.querySelector(".header div").style.display="none";
+	function movePage(event, pageNo) {
+		event.preventDefault();
+		document.querySelector("input[name=pageno]").value = pageNo;
+		submitConditionForm();
 	}
 	
 	function submitConditionForm() {

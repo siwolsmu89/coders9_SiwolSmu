@@ -9,51 +9,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../resources/css/common.css">
+<link rel="stylesheet" href="../resources/css/regform.css">
 <title>Board v1 Home</title>
-<style>
-	@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap');
-
-	body {
-		font-family: 'Patrick Hand';
-		background-color: black;
-		color: white;
-	}
-	
-	.modal {
-		margin-top: 6%;
-	}
-	
-	.container .body {
-	  max-width: 800px;
-	  margin: auto;
-	  margin-top: 50px;
-	}
-	
-	.input-group span {
-		background-color: white !important;
-		border: none;
-		color: black;
-		padding-left: 3px;
-		padding-right: 6px;
-	}
-	.input-group span span {
-		padding: 0px;
-	}
-	.input-group input {
-		background-color: white !important;
-		width: 15px;
-		padding: 1px;
-	}
-	.input-group input:focus {
-		outline: none;
-	}
-	.input-group input::placeholder {
-		color: #659852;
-	}
-	.input-group input {
-		font-weight: bold;
-	}
-</style>
 </head>
 <body>
 <div class="container">
@@ -70,26 +28,35 @@
 		<div class="row text-center">
 			<div class="col-12">
 				<h1>Welcome To Board v1</h1>
-				<small class="text-muted">MinSeok Kwon</small>
 				<%
 					if (error != null) {
+				%>
+					<p style="color: red;">
+				<%
 						if (error.equals("loginfail")) {
 				%>
-						<p style="color: red;">Login Failed : Check your ID/Password and Try Again.</p>
+						Login Failed : Check your ID/Password and Try Again.
 				<%
 						} else if (error.equals("session")) {
 				%>
-						<p style="color: red;">Session Invalidated : Please Login Again.</p>
+						Request Denied : Need a Login To User this Service.
 				<%
 						} else if (error.equals("quit")) {
 				%>
-						<p style="color: red;">You are Dead To Us.</p>
+						You are Dead To Us.
 				<%
 						} else {
 				%>
-						<p style="color red;">Error Occurred : Pleas Try Again.</p>
+						Error Occurred : Pleas Try Again.
 				<%			
 						}
+				%>
+					</p>
+				<%
+					} else {
+				%>
+					<p class="text-muted">MinSeok Kwon</p>
+				<%
 					}
 				%>
 			</div>

@@ -11,26 +11,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<title>Insert title here</title>
+<link rel="stylesheet" href="../resources/css/common.css">
+<title>Boards v1 Modify User</title>
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Patrick+Hand&display=swap');
-
-	body {
-		font-family: 'Patrick Hand';
-		background-color: black;
-		color: white;
-	}
-	
-	.modal {
-		margin-top: 6%;
-	}
-	
-	.container .body {
-	  max-width: 800px;
-	  margin: auto;
-	  margin-top: 50px;
-	}
-	
 	.table {
 		color: lightgray;
 		border-bottom: 1px solid lightgray;
@@ -38,22 +21,13 @@
 </style>
 </head>
 <body>
+<%@ include file="../common/loginCheck.jsp" %>
 <div class="container">
 	<div class="header mb-3">
 		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 		<%@ include file="../common/header.jsp" %>
 	</div>
-	
-	<div class="row justify-content-center">
-		<div class="col-9">
-			<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>
-		</div>
-	</div>
 	<%
-		if (session.getAttribute("loginUserNo") == null) {
-			response.sendRedirect("../common/home.jsp?error=session");
-			return;
-		}
 		int userNo = (int) session.getAttribute("loginUserNo");
 		UserDao userDao = new UserDao();
 		User user = userDao.getUserByNo(userNo);
@@ -116,19 +90,12 @@
 		</div>
 	</div>
 	
-	
-	<div class="row justify-content-center mt-5">
-		<div class="col-9">
-			<div style="border: 1px solid lightgray;" onmouseover="showFooter()"></div>
-		</div>
-	</div>
 	<div class="footer" onclick="hideFooter()">
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
 <script type="text/javascript">
-	
 	function checkPwdToggle(event) {
 		if (event.target.checked) {
 			document.querySelector("input[name=password2]").disabled = false;
@@ -199,22 +166,6 @@
 		
 		document.querySelector("#form-modify-info").submit();
 		
-	}
-
-	function showFooter() {
-		document.querySelector(".footer div").style.display="";
-	}
-	
-	function hideFooter() {
-		document.querySelector(".footer div").style.display="none";
-	}
-
-	function showHeader() {
-		document.querySelector(".header div").style.display="";
-	}
-	
-	function hideHeader() {
-		document.querySelector(".header div").style.display="none";
 	}
 </script>
 </body>
