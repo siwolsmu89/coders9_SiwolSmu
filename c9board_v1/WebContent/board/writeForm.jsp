@@ -25,7 +25,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../common/loginCheck.jsp" %>
+<%@ include file="../account/loginCheck.jsp" %>
 <%
 	int userNo = (int) session.getAttribute("loginUserNo");
 %>
@@ -64,7 +64,7 @@
 						<tr>
 							<td colspan="2" class="text-right">
 								<button type="reset" class="btn btn-sm btn-dark">Reset</button>
-								<button type="button" onclick="checkForm()" class="btn btn-sm btn-danger">Submit</button> 
+								<button type="button" onclick="checkBoardForm()" class="btn btn-sm btn-danger">Submit</button> 
 							</td>
 						</tr>
 					</table>
@@ -73,28 +73,10 @@
 		</div>
 	</div>
 	
-	<div class="footer" onclick="hideFooter()">
+	<div class="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
-<script type="text/javascript">
-	function checkForm() {
-		var titleForm = document.querySelector("input[name=title]");
-		if (!titleForm.value) {
-			titleForm.placeholder = "We need a Title";
-			titleForm.focus();
-			return;
-		}
-		
-		var contentForm = document.querySelector("textarea[name=content]");
-		if (!contentForm.value) {
-			contentForm.placeholder = "We need a Content";
-			contentForm.focus();
-			return;
-		}
-		
-		document.querySelector("#form-board-write").submit();
-	}
-</script>
+<script src="../resources/script/functions.js"></script>
 </body>
 </html>

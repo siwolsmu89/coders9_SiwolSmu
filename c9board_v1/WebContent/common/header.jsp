@@ -30,14 +30,3 @@
 		<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>
 	</div>
 </div>
-<script type="text/javascript">
-
-	function showHeader() {
-		document.querySelector(".header #header-nav").style.display="";
-	}
-	
-	function hideHeader() {
-		document.querySelector(".header #header-nav").style.display="none";
-	}
-
-</script>

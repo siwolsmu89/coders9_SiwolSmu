@@ -21,10 +21,9 @@
 </style>
 </head>
 <body>
-<%@ include file="../common/loginCheck.jsp" %>
+<%@ include file="../account/loginCheck.jsp" %>
 <div class="container">
 	<div class="header mb-3">
-		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 		<%@ include file="../common/header.jsp" %>
 	</div>
 	<%
@@ -80,7 +79,7 @@
 							<th>Update</th>
 							<td>
 								<a href="myinfo.jsp"><button type="button" class="btn btn-sm btn-secondary">Cancel</button></a>
-								<button type="button" onclick="checkForm()" class="btn btn-sm btn-danger">Submit</button>
+								<button type="button" onclick="checkUserModForm()" class="btn btn-sm btn-danger">Submit</button>
 							</td>
 						</tr>
 					</table>
@@ -90,83 +89,10 @@
 		</div>
 	</div>
 	
-	<div class="footer" onclick="hideFooter()">
-		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+	<div class="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
-<script type="text/javascript">
-	function checkPwdToggle(event) {
-		if (event.target.checked) {
-			document.querySelector("input[name=password2]").disabled = false;
-		} else {
-			document.querySelector("input[name=password2]").disabled = true;
-		}
-	}
-	
-	function checkForm() {
-		var nicknameEl = document.querySelector("input[name=nickname]");
-		var contactEl = document.querySelector("input[name=contact]");
-		var password1El = document.querySelector("input[name=password]");
-		var password2El = document.querySelector("input[name=password2]");
-		var newPwdCheckEl = document.querySelector("input[name=newpwdcheck]");
-		var pwdRegExp = /(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)/;
-		
-		if (!nicknameEl.value) {
-			nicknameEl.placeholder = "Input new Nickname Here";
-			nicknameEl.focus();
-			return;
-		}
-		
-		if (!password1El.value) {
-			password1El.placeholder = "Pwd Here";
-			password1El.focus();
-			return;
-		}
-		
-		if (newPwdCheckEl.checked) {
-			if (password1El.value != password2El.value) {
-				password1El.value = "";
-				password2El.value = "";
-				password1El.placeholder = "New Pwd";
-				password2El.placeholder = "Not Equals";
-				return;
-			}
-
-			if (!pwdRegExp.exec(password1El.value)) {
-				password1El.value ="";
-				password2El.value ="";
-				password1El.placeholder ="Simple Pwd";
-				password2El.placeholder ="No Simple Pwd Allowed";
-				
-				password1El.focus();
-				return;
-			}
-			
-			if (nicknameEl.value == document.querySelector("input[name=oldnick]").value 
-					&& contactEl.value == document.querySelector("input[name=oldcontact]").value
-					&& password1El.value == document.querySelector("input[name=oldpwd]").value) {
-				
-				document.querySelector("#p-no-change").style.display = "";
-				return;
-			}
-		} else {
-			if (password1El.value != document.querySelector("input[name=oldpwd]").value) {
-				password1El.value = "";
-				password1El.placeholder = "Wrong Pwd";
-				return;
-			}
-			if (nicknameEl.value == document.querySelector("input[name=oldnick]").value 
-					&& contactEl.value == document.querySelector("input[name=oldcontact]").value) {
-				
-				document.querySelector("#p-no-change").style.display = "";
-				return;
-			}
-		}
-		
-		document.querySelector("#form-modify-info").submit();
-		
-	}
-</script>
+<script src="../resources/script/functions.js"></script>
 </body>
 </html>

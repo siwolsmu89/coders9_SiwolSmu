@@ -17,7 +17,7 @@
 <title>Board v1 Detail</title>
 </head>
 <body>
-<%@ include file="../common/loginCheck.jsp" %>
+<%@ include file="../account/loginCheck.jsp" %>
 <%
 	if (request.getParameter("boardno") == null) {
 		response.sendRedirect("list.jsp?err=empty");
@@ -41,7 +41,6 @@
 %>
 <div class="container">
 	<div class="header mb-3">
-		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 		<%@ include file="../common/header.jsp" %>
 	</div>
 	
@@ -96,10 +95,10 @@
 		</div>
 	</div>
 
-	<div class="footer" onclick="hideFooter()">
-		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+	<div class="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
+<script src="../resources/script/functions.js"></script>
 </body>
 </html>

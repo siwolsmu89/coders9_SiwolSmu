@@ -16,19 +16,15 @@
 <body>
 <div class="container">
 	<div class="header mb-3">
-		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 		<%@ include file="header.jsp" %>
 	</div>
-	
-	<%
-		String error = request.getParameter("error");
-	%>
 	
 	<div class="body">
 		<div class="row text-center">
 			<div class="col-12">
 				<h1>Welcome To Board v1</h1>
 				<%
+					String error = request.getParameter("error");
 					if (error != null) {
 				%>
 					<p style="color: red;">
@@ -92,14 +88,12 @@
 		</div>
 	</div>
 	
-	<div id="modal-include">
-		<%@ include file="regForm.jsp" %>
-	</div>
-	
-	<div class="footer" onclick="hideFooter()">
-		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+	<div class="footer">
 		<%@ include file="footer.jsp" %>
 	</div>
+
+	<%@ include file="../account/regForm.jsp" %>
 </div>
+<script src="../resources/script/functions.js"></script>
 </body>
 </html>

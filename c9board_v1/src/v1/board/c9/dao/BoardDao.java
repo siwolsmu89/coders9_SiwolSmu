@@ -15,12 +15,6 @@ import v1.board.c9.vo.Board;
 
 public class BoardDao {
 	
-	private Board resultSetToBoard(ResultSet rs) {
-		Board board = new Board();
-		
-		return board;
-	}
-
 	private BoardDto resultSetToBoardDto(ResultSet rs) throws SQLException {
 		BoardDto board = new BoardDto();
 		
@@ -87,6 +81,7 @@ public class BoardDao {
 		String sql = "SELECT count(1) AS cnt ";
 		sql += "FROM v1_boards ";
 		sql += "WHERE board_title like '%" + keyword + "%' ";
+		sql += "AND board_deleted_yn != 'Y' ";
 		if (!"".equals(writerType)) {
 			sql += "AND user_no = " + writerType;
 		}
@@ -140,14 +135,14 @@ public class BoardDao {
 		sql += "FROM v1_boards B, v1_users U ";
 		sql += "WHERE B.user_no = U.user_no ";
 		sql += "AND B.board_deleted_yn != 'Y' ";
-		sql += "ORDER BY B.board_no DESC) boards ";
-		sql += "WHERE RN BETWEEN " + begin + " AND " + end + " ";
 		if (!("").equals(keyword)) {
 			sql += "AND board_title LIKE '%" + keyword + "%' ";
 		}
 		if (!("").equals(writerType)) {
-			sql += "AND user_no = " + writerType + " ";
+			sql += "AND B.user_no = " + writerType + " ";
 		}
+		sql += "ORDER BY B.board_no DESC) boards ";
+		sql += "WHERE RN BETWEEN " + begin + " AND " + end + " ";
 		sql += "ORDER BY boards.board_no DESC";
 		
 		Connection con = ConnectionUtil.getConnection();

@@ -21,10 +21,9 @@
 </style>
 </head>
 <body>
-<%@ include file="../common/loginCheck.jsp" %>
+<%@ include file="../account/loginCheck.jsp" %>
 <div class="container">
 	<div class="header mb-3">
-		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 		<%@ include file="../common/header.jsp" %>
 	</div>
 	
@@ -70,18 +69,10 @@
 		</div>
 	</div>
 	
-	<div class="footer" onclick="hideFooter()">
-		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+	<div class="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
-<script type="text/javascript">
-	function delUser() {
-		if (confirm("If You quit, You can't use any of our services. Are you sure?")) {
-			
-			location.href="deluser.jsp";
-		}
-	}
-</script>
+<script src="../resources/script/functions.js"></script>
 </body>
 </html>

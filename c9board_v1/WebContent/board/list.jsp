@@ -17,15 +17,13 @@
 <link rel="stylesheet" href="../resources/css/common.css">
 <title>Welcome To Board v1</title>
 <style>
-
-	.form-group select.form-control {
+	#form-list-condition .form-group select.form-control {
 		width: 120px;
 		text-align: right;
 		height: 35px;
 		padding-left:23px;
 		padding-top: 3px;
 	}
-	
 	#main-table table {
 		color: lightgray;
 		text-align: center;
@@ -42,13 +40,11 @@
 </style>
 </head>
 <body>
+<%@ include file="../account/loginCheck.jsp" %>
 <div class="container">
-	<%@ include file="../common/loginCheck.jsp" %>
 	<div class="header mb-3">
-		<!-- 마우스를 맨 위에 대고 있으면 header 보이기 -->
 		<%@ include file="../common/header.jsp" %>
 	</div>
-	
 	<%
 		String paramPageNo = request.getParameter("pageno");
 		String paramKeyword = request.getParameter("keyword");
@@ -72,7 +68,6 @@
 		BoardDao boardDao = new BoardDao();
 		List<BoardDto> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap);
 	%>
-	
 	<div class="body">
 		<div class="row">
 			<div class="col-12 text-center mb-5">
@@ -87,14 +82,14 @@
 					<a href="writeForm.jsp" class="btn btn-secondary ml-3">Write</a>
 				</div>
 				<div class="col-8 d-flex justify-content-end">
-					<div class="form-group" onchange="submitConditionForm()">
+					<div class="form-group" onchange="submitConditionForm(1)">
 						<select id="select-row-count" class="form-control" name="rowcount">
 							<option value="10" <%=rowsPerPage == 10 ? "selected" : "" %>>10 rows</option>
 							<option value="20" <%=rowsPerPage == 20 ? "selected" : "" %>>20 rows</option>
 							<option value="50" <%=rowsPerPage == 50 ? "selected" : "" %>>50 rows</option>
 						</select>
 					</div>
-					<div class="ml-1 form-group" onchange="submitConditionForm()">
+					<div class="ml-1 form-group" onchange="submitConditionForm(1)">
 						<select id="select-writer" class="form-control" name="writertype">
 							<option value="">get All</option>
 							<option value="<%=userNo %>" <%=(""+userNo).equals(writerType) ? "selected" : "" %>>get My</option>
@@ -164,7 +159,7 @@
 					int totalPages = (int) (Math.ceil((double) totalRows/rowsPerPage));
 					int thisBlock = (pageNo/pagesPerBlock) + 1;
 					int blockBegin = (thisBlock-1) * 4 + 1;
-					int blockEnd = (thisBlock * 4) > totalPages ? totalPages : thisBlock;
+					int blockEnd = (thisBlock * 4) > totalPages ? totalPages : thisBlock * 4;
 				%>
 					<a onclick="movePage(event, <%=pageNo > 1 ? pageNo - 1 : 1 %>)" <%=pageNo > 1 ? "href='#'" : "" %>>&laquo;</a>
 				<%
@@ -180,28 +175,17 @@
 				<div class="col-4 d-flex justify-content-end">
 					<div class="form-group">
 						<input type="text" name="keyword" value="<%=keyword %>"	placeholder="Find Title Containing Key" />
-						<button class="badge badge-dark">Find</button>
+						<button type="button" onclick="submitConditionForm(1)" class="badge badge-dark">Find</button>
 					</div>
 				</div>
 			</div>
 		</form>
 	</div>
 
-	<div class="footer" onclick="hideFooter()">
-		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
+	<div class="footer">
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
-<script type="text/javascript">
-	function movePage(event, pageNo) {
-		event.preventDefault();
-		document.querySelector("input[name=pageno]").value = pageNo;
-		submitConditionForm();
-	}
-	
-	function submitConditionForm() {
-		document.querySelector("#form-list-condition").submit();
-	}
-</script>
+<script src="../resources/script/functions.js"></script>
 </body>
 </html>
