@@ -62,11 +62,6 @@
 		<%@ include file="header.jsp" %>
 	</div>
 	
-	<div class="row justify-content-center">
-		<div class="col-5">
-			<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>
-		</div>
-	</div>
 	<%
 		String error = request.getParameter("error");
 	%>
@@ -130,149 +125,14 @@
 		</div>
 	</div>
 	
-	<%@ include file="regForm.jsp" %>
-	
-	<div class="row justify-content-center mt-5">
-		<div class="col-5">
-			<div style="border: 1px solid lightgray;" onmouseover="showFooter()"></div>
-		</div>
+	<div id="modal-include">
+		<%@ include file="regForm.jsp" %>
 	</div>
+	
 	<div class="footer" onclick="hideFooter()">
 		<!-- 마우스를 맨 아래에 대고 있으면 footer 보이기 -->
 		<%@ include file="footer.jsp" %>
 	</div>
 </div>
-<script>
-	function resize(event) {
-		var value = event.target.value;
-		var length = value.length;
-		var width = 15 + (length * 10) + "px";
-		event.target.setAttribute("style", "border: none; width: " + width + ";");
-	}
-	
-	function checkId() {
-		var idRegExp = /^[a-zA-Z]([a-zA-Z0-9])/;
-		var id = document.querySelector("input[name=userid]").value;
-		
-		if (!idRegExp.exec(id)) {
-			document.querySelector("#input-userid-error").style.display="";
-			document.querySelector("input[name=userid]").focus();
-			document.querySelector("input[name=userid]").value = "";
-			return;
-		} else {
-			document.querySelector("#input-userid-error").style.display="none";
-		}
-	}
-	
-	function checkPwd1() {
-		var pwdRegExp = /(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)/;
-		var pwd = document.querySelector("input[name=userpassword1]").value;
-		
-		if (!pwdRegExp.exec(pwd)) {
-			document.querySelector("#input-pwd-error").style.display = "";
-			document.querySelector("input[name=userpassword1]").focus();
-			document.querySelector("input[name=userpassword1]").value = "";
-			return;
-		} else {
-			document.querySelector("#input-pwd-error").style.display = "none";
-		}
-	}
-	
-	function checkPwd2() {
-		var pwd1 = document.querySelector("input[name=userpassword1]").value;
-		var pwd2 = document.querySelector("input[name=userpassword2]").value;
-		
-		if (pwd1 != pwd2) {
-			document.querySelector("input[name=userpassword1]").value = "";
-			document.querySelector("input[name=userpassword2]").value = "";
-			document.querySelector("input[name=userpassword1]").focus();
-			document.querySelector("#input-pwd2-error").style.display = "";
-			return true;
-		} else {
-			document.querySelector("#input-pwd2-error").style.display = "none";
-		}
-	}
-	
-	function checkForms() {
-		var id = document.querySelector("input[name=userid]").value;
-		if (!id) {
-			document.querySelector("input[name=userid]").focus();
-			return true;
-		}
-		
-		var name = document.querySelector("input[name=username]").value;
-		if (!name) {
-			document.querySelector("input[name=username]").focus();
-			return true;
-		}
-		
-		var nickname = document.querySelector("input[name=usernickname]").value;
-		if (!nickname) {
-			document.querySelector("input[name=usernickname]").focus();
-			return true;
-		}
-		
-		var pwd1 = document.querySelector("input[name=userpassword1]").value;
-		if (!pwd1) {
-			document.querySelector("input[name=userpassword1]").focus();
-			return true;
-		}
-		
-		return false;
-	}
-	
-	function insertUser() {
-		var isFailed = checkForms();
-		if (isFailed) {
-			return;
-		}
-		
-		var formData = "userid=" + document.querySelector("input[name=userid]").value
-					+ "&username=" + document.querySelector("input[name=username]").value
-					+ "&usernickname=" + document.querySelector("input[name=usernickname]").value
-					+ "&userpassword=" + document.querySelector("input[name=userpassword1]").value
-					+ "&usercontact=" + document.querySelector("input[name=usercontact]").value;
-		
-		var xhr = new XMLHttpRequest();
-		
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				var result = xhr.responseText;
-				result = result.replace(/\n/g, "").trim();
-				console.log(result);
-				if (result == "success") {
-					document.querySelector("#modal-error-box").style.display="none";
-					document.querySelector("input[name=loginid]").setAttribute("placeholder", "Welcome, New User");
-					document.querySelector("input[name=loginpwd]").setAttribute("placeholder", "Happy To See You");
-					document.querySelector(".close").click();
-				} else {
-					document.querySelector("#modal-error-box").style.display="";					
-				}
-			}
-		}
-		
-		xhr.open("POST", "../account/register.jsp");
-		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-		
-		xhr.send(formData);
-	}
-	
-	function showFooter() {
-		document.querySelector(".footer div").style.display="";
-	}
-	
-	function hideFooter() {
-		document.querySelector(".footer div").style.display="none";
-	}
-	
-	function showHeader() {
-		document.querySelector(".header div").style.display="";
-	}
-	
-	function hideHeader() {
-		document.querySelector(".header div").style.display="none";
-	}
-	
-</script>
 </body>
 </html>

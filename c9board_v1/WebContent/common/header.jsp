@@ -8,7 +8,7 @@
 	String colorBasic = "style='color: lightgray;'";
 	String colorActive = "style='color: white; font-weight: bold;'";
 %>
-<div class="row justify-content-center" onclick="hideHeader()">
+<div id="header-nav" class="row justify-content-center" onclick="hideHeader()">
 	<div class="col-5 text-center mt-3">
 		<nav class="navbar navbar-expand-sm justify-content-center">
 			<ul class="navbar-nav" style="justify-content: space-between; width: 70%;">
@@ -25,3 +25,19 @@
 		</nav>
 	</div>
 </div>
+<div class="row justify-content-center mt-3">
+	<div class="col-9">
+		<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>
+	</div>
+</div>
+<script type="text/javascript">
+
+	function showHeader() {
+		document.querySelector(".header #header-nav").style.display="";
+	}
+	
+	function hideHeader() {
+		document.querySelector(".header #header-nav").style.display="none";
+	}
+
+</script>
