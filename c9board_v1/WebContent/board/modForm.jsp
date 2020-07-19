@@ -15,14 +15,6 @@
 <link rel="stylesheet" href="../resources/css/common.css">
 <link rel="stylesheet" href="../resources/css/boardtable.css">
 <title>Board v1 Board Modify Board</title>
-<style type="text/css">
-	input[name=title] {
-		padding: 2px 15px;
-	}
-	textarea {
-		padding: 3px 15px;
-	}
-</style>
 </head>
 <body>
 <%@ include file="../account/loginCheck.jsp" %>

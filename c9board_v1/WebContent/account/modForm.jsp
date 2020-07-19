@@ -42,7 +42,7 @@
 		<div class="row mt-3 justify-content-center">
 			<div class="col-9">
 				<form id="form-modify-info" action="modify.jsp" method="POST">
-					<table class="table">
+					<table id="table-account" class="table">
 						<tr>
 							<th>ID</th>
 							<td><%=user.getId() %></td>

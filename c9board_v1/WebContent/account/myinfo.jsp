@@ -13,12 +13,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../resources/css/common.css">
 <title>Board v1 My Info</title>
-<style>
-	.table {
-		color: lightgray;
-		border-bottom: 1px solid lightgray;
-	}
-</style>
 </head>
 <body>
 <%@ include file="../account/loginCheck.jsp" %>
@@ -42,7 +36,7 @@
 		
 		<div class="row mt-3 justify-content-center">
 			<div class="col-9">
-			<table class="table">
+			<table id="table-account" class="table">
 				<tr>
 					<th>ID</th>
 					<td><%=user.getId() %></td>

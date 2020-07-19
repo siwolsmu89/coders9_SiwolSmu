@@ -4,7 +4,11 @@
 	<div class="modal-dialog">
 		<div class="modal-content" style="color: black; background-color: white; border: 1px solid gray;">
 			<div class="modal-header">
-				<h4>User <span style="color: #7a4e3c;">user</span> = <span style="font-weight: bold; color: #5f0260;">new</span> User();</h4>
+				<h4 data-toggle="tooltip" data-placement="bottom" title="v1.board.c9.vo.User.User()">
+					User 
+					<span style="color: #7a4e3c;">user</span> = <span style="font-weight: bold; color: #5f0260;">new</span> 
+					User();
+				</h4>
 			</div>
 			<div class="modal-body">
 				<form id="register-form" method="POST" action="../account/register.jsp">

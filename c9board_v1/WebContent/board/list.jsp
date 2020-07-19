@@ -66,7 +66,7 @@
 		conditionMap.put("userNo", userNo);
 		
 		BoardDao boardDao = new BoardDao();
-		List<BoardDto> boardList = boardDao.getBoardListWithCondition(userNo, conditionMap);
+		List<BoardDto> boardList = boardDao.getBoardListWithCondition(conditionMap);
 	%>
 	<div class="body">
 		<div class="row">

@@ -11,3 +11,8 @@ body {
 	margin: auto;
 	margin-top: 50px;
 }
+
+#table-account {
+	color: lightgray;
+	border-bottom: 1px solid lightgray;
+}

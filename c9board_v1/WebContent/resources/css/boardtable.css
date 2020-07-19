@@ -4,3 +4,10 @@
 .table.boards th {
 	text-align: center;
 }
+
+#form-board-write input[name=title] {
+	padding: 2px 15px;
+}
+#form-board-write textarea {
+	padding: 3px 15px;
+}

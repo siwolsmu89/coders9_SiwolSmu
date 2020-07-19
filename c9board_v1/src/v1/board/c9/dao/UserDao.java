@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import v1.board.c9.utils.ConnectionUtil;
 import v1.board.c9.utils.QueryUtil;
@@ -58,9 +56,15 @@ public class UserDao {
 		
 		pstmt.close();
 		con.close();
-		
 	}
 	
+	/**
+	 * Update an information row of a certain user from user table.
+	 * 
+	 * @param User user is a Value Object holding all data we need to set the UPDATE statement.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public void updateUser(User user) throws SQLException {
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("user.updateUser"));
@@ -75,6 +79,13 @@ public class UserDao {
 		con.close();
 	}
 	
+	/**
+	 * Set 'user_quit_yn' column of a certain user as 'Y' from user table.
+	 * 
+	 * @param userNo is a Key to find a user who wants to quit.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public void deleteUser(int userNo) throws SQLException {
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("user.deleteUser"));
@@ -85,6 +96,14 @@ public class UserDao {
 		con.close();
 	}
 	
+	/**
+	 * Find a user from user table with 'user_no'.
+	 * 
+	 * @param userNo is a primary key of user table.
+	 * @return If there's a user matches with userNo, returns a Value Object User. Else, returns null.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public User getUserByNo(int userNo) throws SQLException {
 		User user = null;
 		
@@ -104,6 +123,14 @@ public class UserDao {
 		return user;
 	}
 	
+	/**
+	 * Find a user from user table with 'user_id'.
+	 * 
+	 * @param userId is an unique column of user table.
+	 * @return If there's a user matches with userId, returns a Value Object User. Else, returns null.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public User getUserById(String userId) throws SQLException {
 		User user = null;
 		
@@ -121,11 +148,5 @@ public class UserDao {
 		con.close();
 		
 		return user;
-	}
-	
-	public List<User> getAllUserList() {
-		List<User> userList = new ArrayList<User>();
-		
-		return userList;
 	}
 }

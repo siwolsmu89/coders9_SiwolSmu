@@ -15,6 +15,15 @@ import v1.board.c9.vo.Board;
 
 public class BoardDao {
 	
+	/**
+	 * After executing a prepared SQL statement, we need to get data from a ResultSet and set those data into Object BoardDto. 
+	 * This work will be repeatedly done from many methods within BoardDao. 
+	 * Using this method will help it simpler.
+	 * @param ResultSet rs is a Set holding data from Users table.
+	 * @return BoardDto board is a new BoardDto Object holding data of a certain row from Boards table and Users table.
+	 * @throws SQLException 
+	 * @author SiwolSmu
+	 */
 	private BoardDto resultSetToBoardDto(ResultSet rs) throws SQLException {
 		BoardDto board = new BoardDto();
 		
@@ -29,6 +38,13 @@ public class BoardDao {
 		return board;
 	}
 	
+	/**
+	 * Insert a new row into board table.
+	 * 
+	 * @param Board board is a Value Object holding all data we need to set the INSERT statement.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public void insertBoard(Board board) throws SQLException {
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.insertBoard"));
@@ -41,6 +57,13 @@ public class BoardDao {
 		con.close();
 	}
 	
+	/**
+	 * Update an information row of a certain board from board table.
+	 * 
+	 * @param Board board is a Value Object holding all data we need to set the UPDATE statement.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public void updateBoard(Board board) throws SQLException {
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.updateBoard"));
@@ -53,6 +76,13 @@ public class BoardDao {
 		con.close();
 	}
 	
+	/**
+	 * Update an information row of a certain board from board table.
+	 * 
+	 * @param BoardDto board is a Value Object holding all data we need to set the UPDATE statement.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public void updateBoard(BoardDto board) throws SQLException {
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.updateBoard"));
@@ -65,6 +95,13 @@ public class BoardDao {
 		con.close();
 	}
 	
+	/**
+	 * Set 'board_deleted_yn' column of a certain board as 'Y' from board table.
+	 * 
+	 * @param boardNo is a Key to find a board which will be deleted.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public void deleteBoard(int boardNo) throws SQLException {
 		Connection con = ConnectionUtil.getConnection();
 		PreparedStatement pstmt = con.prepareStatement(QueryUtil.getSQL("board.deleteBoard"));
@@ -75,6 +112,15 @@ public class BoardDao {
 		con.close();
 	}
 	
+	/**
+	 * Count all boards in Search Conditions and Not be deleted, Using Dynamic SQL statement.
+	 * 
+	 * @param String keyword is a keyword for searching title.
+	 * @param String writerType is a keyword for searching writer.
+	 * @return int count is a number of all boards in conditions.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public int getBoardCount(String keyword, String writerType) throws SQLException {
 		int count = 0;
 		
@@ -101,6 +147,14 @@ public class BoardDao {
 		return count;
 	}
 	
+	/**
+	 * Find a board from board table with 'board_no'.
+	 * 
+	 * @param int boardNo is a primary key of board table.
+	 * @return If there's a board matches with boardNo, BoardDto board. Else, null.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
 	public BoardDto getBoardByNo(int boardNo) throws SQLException {
 		BoardDto board = null;
 		Connection con = ConnectionUtil.getConnection();
@@ -119,7 +173,16 @@ public class BoardDao {
 		return board;
 	}
 	
-	public List<BoardDto> getBoardListWithCondition(int userNo, Map<String, Object> conditionMap) throws SQLException {
+	/**
+	 * Find all boards with Search Conditions given as a Map, Using Dynamic SQL Statement.
+	 * 
+	 * @param Map<String, Object> conditionMap contains all Search Conditions. 
+	 * It contains keyword, writerType, pageNo, rowsPerPage.
+	 * @return ArrayList<BoardDto> boardList holding all informations of board found.
+	 * @throws SQLException
+	 * @author SiwolSmu
+	 */
+	public List<BoardDto> getBoardListWithCondition(Map<String, Object> conditionMap) throws SQLException {
 		List<BoardDto> boardList = new ArrayList<BoardDto>();
 		
 		String keyword = (String) conditionMap.get("keyword");
