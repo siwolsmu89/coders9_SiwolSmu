@@ -9,8 +9,8 @@
 <div id="footer-info" class="row justify-content-center" onclick="hideFooter()">
 	<div class="col-5 text-center mt-3 mb-3">
 		<div class="text-muted" style="padding: 0;">
-			<h6 style=" margin-bottom: 0;">board_v1 Info</h6>
-			<small>Working Period : 2020/07/06 ~ </small>
+			<h6 style=" margin-bottom: 0;"><a href="../common/about.jsp">board_v1 Info</a></h6>
+			<small>Working Period : 2020/07/06 ~ 2020/07/21 </small>
 		</div>
 	</div>
 </div>
