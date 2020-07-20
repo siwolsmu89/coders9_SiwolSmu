@@ -5,6 +5,7 @@
 		<div style="border: 1px solid lightgray;" onmouseover="showFooter()"></div>
 	</div>
 </div>
+
 <div id="footer-info" class="row justify-content-center" onclick="hideFooter()">
 	<div class="col-5 text-center mt-3 mb-3">
 		<div class="text-muted" style="padding: 0;">

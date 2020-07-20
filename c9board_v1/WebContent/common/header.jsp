@@ -25,6 +25,7 @@
 		</nav>
 	</div>
 </div>
+
 <div class="row justify-content-center mt-3">
 	<div class="col-9">
 		<div style="border: 1px solid lightgray;" onmouseover="showHeader()"></div>

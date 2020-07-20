@@ -32,6 +32,7 @@
 				<h1>Board v1 Write</h1>
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="col-12">
 				<form id="form-board-write" method="POST" action="regboard.jsp">

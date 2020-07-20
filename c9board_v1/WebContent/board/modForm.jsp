@@ -36,6 +36,7 @@
 				<h1>Board v1 Modify</h1>
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="col-12">
 				<form id="form-board-write" method="POST" action="modboard.jsp">

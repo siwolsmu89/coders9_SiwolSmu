@@ -16,3 +16,24 @@ body {
 	color: lightgray;
 	border-bottom: 1px solid lightgray;
 }
+
+#form-list-condition .form-group select.form-control {
+	width: 120px;
+	text-align: right;
+	height: 35px;
+	padding-left:23px;
+	padding-top: 3px;
+}
+#main-table table {
+	color: lightgray;
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+}
+#main-table a, #pagenation a {
+	text-decoration: none;
+	color: lightgray;
+}
+#main-table a:hover, #pagenation a:hover {
+	color: white;
+	font-weight: bolder;
+}

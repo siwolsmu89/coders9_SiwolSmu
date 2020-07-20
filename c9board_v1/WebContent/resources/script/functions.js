@@ -1,7 +1,6 @@
 function showHeader() {
 	document.querySelector(".header #header-nav").style.display="";
 }
-
 function hideHeader() {
 	document.querySelector(".header #header-nav").style.display="none";
 }
@@ -9,7 +8,6 @@ function hideHeader() {
 function showFooter() {
 	document.querySelector(".footer #footer-info").style.display="";
 }
-
 function hideFooter() {
 	document.querySelector(".footer #footer-info").style.display="none";
 }
@@ -20,7 +18,6 @@ function resizeInputWidth(event) {
 	var width = 15 + (length * 6) + "px";
 	event.target.setAttribute("style", "border: none; width: " + width + ";");
 }
-
 function checkId() {
 	var idRegExp = /^[a-zA-Z]([a-zA-Z0-9])/;
 	var id = document.querySelector("#register-form input[name=userid]").value;
@@ -34,7 +31,6 @@ function checkId() {
 		document.querySelector("#input-userid-error").style.display="none";
 	}
 }
-
 function checkPwd1() {
 	var pwdRegExp = /(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)/;
 	var pwd = document.querySelector("#register-form input[name=userpassword1]").value;
@@ -48,7 +44,6 @@ function checkPwd1() {
 		document.querySelector("#input-pwd-error").style.display = "none";
 	}
 }
-
 function checkPwd2() {
 	var pwd1 = document.querySelector("#register-form input[name=userpassword1]").value;
 	var pwd2 = document.querySelector("#register-form input[name=userpassword2]").value;
@@ -63,7 +58,6 @@ function checkPwd2() {
 		document.querySelector("#input-pwd2-error").style.display = "none";
 	}
 }
-
 function checkUserRegForm() {
 	var id = document.querySelector("#register-form input[name=userid]").value;
 	if (!id) {
@@ -91,7 +85,6 @@ function checkUserRegForm() {
 	
 	return false;
 }
-
 function insertUser() {
 	var isFailed = checkUserRegForm();
 	if (isFailed) {
@@ -128,24 +121,6 @@ function insertUser() {
 	xhr.send(formData);
 }
 
-function checkBoardForm() {
-	var titleForm = document.querySelector("#form-board-write input[name=title]");
-	if (!titleForm.value) {
-		titleForm.placeholder = "We need a Title";
-		titleForm.focus();
-		return;
-	}
-	
-	var contentForm = document.querySelector("#form-board-write textarea[name=content]");
-	if (!contentForm.value) {
-		contentForm.placeholder = "We need a Content";
-		contentForm.focus();
-		return;
-	}
-	
-	document.querySelector("#form-board-write").submit();
-}
-
 function checkPwdToggle(event) {
 	if (event.target.checked) {
 		document.querySelector("#form-modify-info input[name=password2]").disabled = false;
@@ -153,7 +128,6 @@ function checkPwdToggle(event) {
 		document.querySelector("#form-modify-info input[name=password2]").disabled = true;
 	}
 }
-
 function checkUserModForm() {
 	var nicknameEl = document.querySelector("#form-modify-info input[name=nickname]");
 	var contactEl = document.querySelector("#form-modify-info input[name=contact]");
@@ -216,7 +190,6 @@ function checkUserModForm() {
 	
 	document.querySelector("#form-modify-info").submit();
 }
-
 function delUser() {
 	if (confirm("If You quit, You can't use any of our services. Are you sure?")) {
 		
@@ -224,11 +197,28 @@ function delUser() {
 	}
 }
 
+function checkBoardForm() {
+	var titleForm = document.querySelector("#form-board-write input[name=title]");
+	if (!titleForm.value) {
+		titleForm.placeholder = "We need a Title";
+		titleForm.focus();
+		return;
+	}
+	
+	var contentForm = document.querySelector("#form-board-write textarea[name=content]");
+	if (!contentForm.value) {
+		contentForm.placeholder = "We need a Content";
+		contentForm.focus();
+		return;
+	}
+	
+	document.querySelector("#form-board-write").submit();
+}
+
 function movePage(event, pageNo) {
 	event.preventDefault();
 	submitConditionForm(pageNo);
 }
-
 function submitConditionForm(pageNo) {
 	document.querySelector("#form-list-condition input[name=pageno]").value = pageNo;
 	document.querySelector("#form-list-condition").submit();

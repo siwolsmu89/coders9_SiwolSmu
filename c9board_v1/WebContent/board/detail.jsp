@@ -50,6 +50,7 @@
 				<h1>Board v1 Detail</h1>
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="col-12">
 				<table class="table boards">

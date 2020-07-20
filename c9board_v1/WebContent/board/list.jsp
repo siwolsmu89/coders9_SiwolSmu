@@ -16,28 +16,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../resources/css/common.css">
 <title>Welcome To Board v1</title>
-<style>
-	#form-list-condition .form-group select.form-control {
-		width: 120px;
-		text-align: right;
-		height: 35px;
-		padding-left:23px;
-		padding-top: 3px;
-	}
-	#main-table table {
-		color: lightgray;
-		text-align: center;
-		border-bottom: 1px solid lightgray;
-	}
-	a {
-		text-decoration: none;
-		color: lightgray;
-	}
-	a:hover {
-		color: white;
-		font-weight: bolder;
-	}
-</style>
 </head>
 <body>
 <%@ include file="../account/loginCheck.jsp" %>
@@ -68,6 +46,7 @@
 		BoardDao boardDao = new BoardDao();
 		List<BoardDto> boardList = boardDao.getBoardListWithCondition(conditionMap);
 	%>
+	
 	<div class="body">
 		<div class="row">
 			<div class="col-12 text-center mb-5">
@@ -81,6 +60,7 @@
 				<div class="col-4">
 					<a href="writeForm.jsp" class="btn btn-secondary ml-3">Write</a>
 				</div>
+				
 				<div class="col-8 d-flex justify-content-end">
 					<div class="form-group" onchange="submitConditionForm(1)">
 						<select id="select-row-count" class="form-control" name="rowcount">
@@ -89,12 +69,14 @@
 							<option value="50" <%=rowsPerPage == 50 ? "selected" : "" %>>50 rows</option>
 						</select>
 					</div>
+					
 					<div class="ml-1 form-group" onchange="submitConditionForm(1)">
 						<select id="select-writer" class="form-control" name="writertype">
 							<option value="">get All</option>
 							<option value="<%=userNo %>" <%=(""+userNo).equals(writerType) ? "selected" : "" %>>get My</option>
 						</select>
 					</div>
+					
 					<div style="display:none;">
 						<input type="hidden" name="pageno" value="<%=pageNo %>" >
 					</div>
@@ -151,6 +133,7 @@
 					</table>
 				</div>
 			</div>
+			
 			<div id="lower-form" class="row">
 				<div id="pagenation" class="col-8 pl-5  text-muted">
 				<%

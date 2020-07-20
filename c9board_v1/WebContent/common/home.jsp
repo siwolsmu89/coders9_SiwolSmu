@@ -75,10 +75,12 @@
 						}
 					%>
 					</div>
+					
 					<div class="form-group mt-0">
 						<label>Password</label>
 						<input class="form-control" type="password" name="loginpwd" placeholder="Input your password here" />
 					</div>
+					
 					<div class="text-right">
 						<button class="badge badge-dark">LOGIN</button>
 						<button type="button" class="badge badge-dark" data-toggle="modal" data-target="#modal-register-form">JOIN</button>
