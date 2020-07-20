@@ -4,7 +4,6 @@
 
 ### Ignoring Servers/ ###
 Servers/
-/build/
 
 ### Eclipse ###
 .metadata
