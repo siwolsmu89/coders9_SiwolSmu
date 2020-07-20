@@ -2,8 +2,10 @@
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse,java,java-web
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,java,java-web
 
-### Ignoring Servers/ ###
+### Ignoring For TeamProject ###
 Servers/
+.classpath
+.project
 
 ### Eclipse ###
 .metadata
