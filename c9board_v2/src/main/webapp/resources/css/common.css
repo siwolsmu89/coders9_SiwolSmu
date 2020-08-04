@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+
+body {
+	font-family: 'Patrick Hand';
+	background-color: black;
+	color: white;
+}
+
+.container .body {
+	max-width: 800px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+#table-account {
+	color: lightgray;
+	border-bottom: 1px solid lightgray;
+}
+
+#form-list-condition .form-group select.form-control {
+	width: 120px;
+	text-align: right;
+	height: 35px;
+	padding-left:23px;
+	padding-top: 3px;
+}
+#main-table table {
+	color: lightgray;
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+}
+a {
+	text-decoration: none;
+	color: lightgray;
+}
+a:hover {
+	color: white;
+	font-weight: bolder;
+}

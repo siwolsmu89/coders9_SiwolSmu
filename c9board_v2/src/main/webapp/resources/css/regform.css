@@ -1,0 +1,27 @@
+#modal-register-form {
+	margin-top: 6%;
+}
+#modal-register-form .input-group span {
+	background-color: white !important;
+	border: none;
+	color: black;
+	padding-left: 3px;
+	padding-right: 6px;
+}
+#modal-register-form .input-group span span {
+	padding: 0px;
+}
+#modal-register-form .input-group input {
+	background-color: white !important;
+	width: 15px;
+	padding: 1px;
+}
+#modal-register-form .input-group input:focus {
+	outline: none;
+}
+#modal-register-form .input-group input::placeholder {
+	color: #659852;
+}
+#modal-register-form .input-group input {
+	font-weight: bold;
+}
