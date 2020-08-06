@@ -7,15 +7,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes("headerPage")
 public class CommonController {
 
 	private String container = "common/commonContainer";
 	
 	@ModelAttribute("headerPage")
 	public String setHeaderPage() {
-		System.out.println("header page set complete");
-		return "header.jsp";
+		return "commonheader.jsp";
 	}
 	
 	@RequestMapping(value = {"/home.do", "/", "/index.do", "/home"})
