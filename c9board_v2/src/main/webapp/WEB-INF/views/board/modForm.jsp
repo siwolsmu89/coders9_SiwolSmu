@@ -1,6 +1,3 @@
-<%@page import="v1.board.c9.dto.BoardDto"%>
-<%@page import="v1.board.c9.vo.Board"%>
-<%@page import="v1.board.c9.dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,14 +14,6 @@
 <title>Board v1 Board Modify Board</title>
 </head>
 <body>
-<%@ include file="../account/loginCheck.jsp" %>
-<%
-	int boardNo = Integer.parseInt(request.getParameter("boardno"));
-	int userNo = (int) session.getAttribute("loginUserNo");
-	
-	BoardDao boardDao = new BoardDao();
-	BoardDto board = boardDao.getBoardByNo(boardNo);
-%>
 <div class="container">
 	<div class="header mb-3">
 		<%@ include file="../common/header.jsp" %>
@@ -40,7 +29,7 @@
 		<div class="row">
 			<div class="col-12">
 				<form id="form-board-write" method="POST" action="modboard.jsp">
-					<input type="hidden" name="boardno" value="<%=boardNo %>" />
+					<input type="hidden" name="boardno" value="" />
 					<table class="table boards">
 						<colgroup>
 							<col width=20%>
@@ -48,19 +37,19 @@
 						</colgroup>
 						<tr>
 							<th>Title</th>
-							<td><input style="width: 100%;" type="text" name="title" value="<%=board.getTitle() %>" /></td>
+							<td><input style="width: 100%;" type="text" name="title" value="" /></td>
 						</tr>
 						<tr>
 							<th colspan="2">Content</th>
 						</tr>
 						<tr style="border-bottom: 1px solid lightgray;">
 							<td colspan="2" style="height: 150px;">
-								<textarea style="height:145px; width: 100%;" name="content"><%=board.getContent() %></textarea>
+								<textarea style="height:145px; width: 100%;" name="content"></textarea>
 							</td>
 						</tr>
 						<tr>
 							<td colspan="2" class="text-right">
-								<a href="detail.jsp?boardno=<%=boardNo %>" type="button" class="btn btn-sm btn-dark">Cancel</a>
+								<a href="detail.jsp?boardno=" type="button" class="btn btn-sm btn-dark">Cancel</a>
 								<button type="button" onclick="checkBoardForm()" class="btn btn-sm btn-danger">Submit</button> 
 							</td>
 						</tr>

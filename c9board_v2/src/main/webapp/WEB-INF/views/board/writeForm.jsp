@@ -1,6 +1,3 @@
-<%@page import="v1.board.c9.dto.BoardDto"%>
-<%@page import="v1.board.c9.vo.Board"%>
-<%@page import="v1.board.c9.dao.BoardDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -12,15 +9,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="../resources/css/common.css">
-<link rel="stylesheet" href="../resources/css/boardtable.css">
+<link rel="stylesheet" href="/c9/resources/css/common.css">
+<link rel="stylesheet" href="/c9/resources/css/boardtable.css">
 <title>Board v1 Write Board</title>
 </head>
 <body>
-<%@ include file="../account/loginCheck.jsp" %>
-<%
-	int userNo = (int) session.getAttribute("loginUserNo");
-%>
 <div class="container">
 	<div class="header mb-3">
 		<%@ include file="../common/header.jsp" %>
@@ -36,7 +29,7 @@
 		<div class="row">
 			<div class="col-12">
 				<form id="form-board-write" method="POST" action="regboard.jsp">
-					<input type="hidden" name="userno" value="<%=userNo %>" />
+					<input type="hidden" name="userno" value="" />
 					<table class="table boards">
 						<colgroup>
 							<col width=20%>
@@ -70,6 +63,6 @@
 		<%@ include file="../common/footer.jsp" %>
 	</div>
 </div>
-<script src="../resources/script/functions.js"></script>
+<script src="/c9/resources/script/functions.js"></script>
 </body>
 </html>
