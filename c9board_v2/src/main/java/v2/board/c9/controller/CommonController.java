@@ -11,11 +11,6 @@ public class CommonController {
 
 	private String container = "common/commonContainer";
 	
-	@ModelAttribute("headerPage")
-	public String setHeaderPage() {
-		return "commonheader.jsp";
-	}
-	
 	@RequestMapping(value = {"/home.do", "/", "/index.do", "/home"})
 	public String home(Model model) {
 		model.addAttribute("contentPage", "home.jsp");

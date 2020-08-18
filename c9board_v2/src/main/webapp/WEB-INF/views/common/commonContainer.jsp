@@ -16,7 +16,7 @@
 <body>
 <div class="container">
 	<div class="header mb-3">
-		<jsp:include page="${headerPage }" />
+		<%@ include file="header.jsp" %>
 	</div>
 	
 	<div class="body">

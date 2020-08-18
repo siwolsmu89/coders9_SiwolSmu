@@ -5,7 +5,7 @@
 		<nav class="navbar navbar-expand-sm justify-content-center">
 			<ul class="navbar-nav" style="justify-content: space-between; width: 70%;">
 				<li class="nav-item">
-					<a class="nav-link" style="color: white;" href="/c9/home.do">Home</a>
+					<a class="nav-link" href="/c9/home.do">Home</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/c9/board/list.do">Board</a>

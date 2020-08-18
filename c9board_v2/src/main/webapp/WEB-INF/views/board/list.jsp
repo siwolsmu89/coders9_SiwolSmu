@@ -25,7 +25,7 @@
 			<div class="ml-1 form-group" onchange="submitConditionForm(1)">
 				<select id="select-writer" class="form-control" name="writertype">
 					<option value="">get All</option>
-					<option value="" >get My</option>
+					<option value="My" >get My</option>
 				</select>
 			</div>
 			
