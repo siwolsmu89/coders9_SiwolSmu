@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <div class="row">
 	<div class="col-12 text-center mb-5">
-		<h1>Board v1 List</h1>
-		<p class="text-muted">Welcome, </p>
+		<h1>Board v2 List</h1>
+		<p class="text-muted">Welcome, ${loginUser }</p>
 	</div>
 </div>
 
@@ -57,14 +57,14 @@
 						<td colspan="5" style="color: crimson">There's No Articles Written Yet.</td>
 					</tr>
 					<tr style="">
-						<td></td>
+						<td>${board.no }</td>
 						<td>
-							<a href="detail.jsp?boardno=" >
-							
+							<a href="detail.jsp?boardno=${board.no }" >
+								${board.title }
 							</a>
 						</td>
-						<td></td>
-						<td></td>
+						<td>${board.user.nickname }</td>
+						<td>${board.createdDate }</td>
 					</tr>
 				</tbody>
 			</table>

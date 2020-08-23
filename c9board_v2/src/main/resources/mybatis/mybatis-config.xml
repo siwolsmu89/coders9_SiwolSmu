@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<!-- 
+			일부 데이터베이스 제품은 컬럼에 null 값이 저장되는 경우
+			해당 컬럼의 JDBC타입을 요구한다.
+			아래의 설정은 JDBC타입과 상관없이 null값이 저장되도록 한다.
+		 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		
+		<!-- 
+			설정값을 true로 지정하면
+			조회된 컬럼의 값이 null 인 경우라도 setter 메소드나, Map 의 put 메소드를 호출하게 한다.
+			resultType="hashmap"으로 설정하는 경우, 필요한 설정이다.
+			* int,  boolean 과 같은 기본자료형타입의 변수인 경우 null 값이 대입되지 않는 문제가 있다.
+		 -->
+		<setting name="callSettersOnNulls" value="false"/>
+	</settings>
+	
+	<!-- 
+		VO객체에 대해서 별칭을 부여한다.
+		mapper 파일에서 VO객체를 사용할 때 별칭을 사용한다.
+	 -->
+	<typeAliases>
+		<typeAlias type="v2.board.c9.vo.Board" alias="Board"/>
+		<typeAlias type="v2.board.c9.vo.User" alias="User"/>
+	</typeAliases>
+	
+	<!-- 매핑된 sql구문이 있는 매퍼파일을 정의한다. -->
+	<mappers>
+		<mapper resource="mybatis/mappers/boards.xml"/>
+		<mapper resource="mybatis/mappers/users.xml"/>
+	</mappers>
+</configuration>
